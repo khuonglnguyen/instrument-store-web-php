@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr');
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+body {
+    font-family: Mitr;
+  background: rgb(240, 234, 234);
+}
+
+nav {
+  background: #c00277;
+  height: 80px;
+  width: 100%;
+}
+
+label.logo {
+  color: white;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 35px;
+}
+
+nav ul {
+  float: right;
+  margin-right: 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+
+nav ul li a {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+a.active,
+a:hover {
+  background: white;
+  color: mediumvioletred;
+}
+
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+@media(max-width: 952px) {
+    label.logo{
+        font-size: 30px;
+        padding-left: 50px;
+    }
+    nav ul li a{
+        font-size: 16px;
+
+    }
+}
+
+@media(max-width: 858px) {
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #2c3e50;
+        top: 80px;
+        left: -100%;
+        text-align:center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px;
+        line-height: 30px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    a:hover,a.active{
+        background: none;
+        color: #c00277;
+    }
+    #check:checked ~ ul{
+        left: 0;
+    }
+}
+
+.container{
+    height: auto;
+}
+
+.title{
+    background-color: white;
+}
+
+footer {
+  padding: 50px 0;
+  background-color:violet;
+}
+
+footer .social{
+  text-align: center;
+  padding-bottom: 25px;
+  color: white;
+}
+
+footer .social a{
+  color: inherit;
+  font-size: 24px;
+  border: 1px solid #c00277;
+  width: 40px;
+  height: 40px;
+  list-style: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0 8px;
+  opacity: 0.75;
+  transition: 0.5s;
+  background-color: white;
+  color: #c00277;
+}
+
+footer .social a:hover{
+  opacity: 0.9;
+}
+
+footer ul{
+  margin-top: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+footer ul a{
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+footer ul li{
+  display: inline-block;
+  padding: 0 15px;
+}
+
+footer ul li a:hover{
+  opacity: 1;
+  color: #070808;
+}
+
+footer .copyright{
+  margin-top: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: c00277;
+}
+
+.list{
+    width: 100%;
+    background-color: ghostwhite;
+    padding: 10px;
+  }
+
+  .image-cart{
+    height: 200px;
+    width: 200px;
+  }
+
+  th{
+    background-color:  plum;
+    border: 1px solid mediumvioletred;
+  }
+  
+  td{
+    border: 1px solid mediumvioletred;
+    text-align: center;
+  }
+
+  .product-list{
+      padding-top: 1000px;
+  }
+
+  .form-add{
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 10px 400px;
+  }
+
+  input[type=text], input[type=file], input[type=number], textarea, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  input[type=submit] {
+    width: 100%;
+    background-color: mediumvioletred;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: deeppink;
+  }
