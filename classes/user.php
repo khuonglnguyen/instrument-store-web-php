@@ -43,6 +43,7 @@ class user
 				Session::set('userId', $value['id']);
 				Session::set('email', $value['email']);
 				Session::set('fullName', $value['fullName']);
+				Session::set('role_id', $value['role_id']);
 				header("Location:index.php");
 			} else {
 				$alert = "Username hoặc password không đúng!";

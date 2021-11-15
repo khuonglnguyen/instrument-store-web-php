@@ -1,3 +1,14 @@
+<?php
+include '../lib/session.php';
+Session::checkSessionAdmin();
+$role_id = Session::get('role_id');
+if ($role_id == 1) {
+    # code...
+} else {
+    header("Location:../index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,43 +31,10 @@
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.html" class="active">Quản lý Sản phẩm</a></li>
-            <li><a href="orderlist.html" id="order">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php" class="active">Quản lý Sản phẩm</a></li>
+            <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
-    <div class="title">
-        <h1>Danh sách sản phẩm</h1>
-    </div>
-    <div class="action">
-        <a href="add_product.html">Thêm mới</a>
-    </div>
-    <div class="container">
-        <table class="list">
-            <tr>
-                <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Đơn giá</th>
-                <th>Mô tả</th>
-                <th>Thao tác</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>OPPO A47</td>
-                <td><img class="image-cart" src="../images/oppo-a74-blue-9-600x600.jpg" alt=""></td>
-                <td>$499</td>
-                <td>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s.
-                </td>
-                <td>
-                    <a href="edit_product.html">Sửa</a>
-                    <a href="#">Xóa</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    </div>
     <footer>
         <div class="social">
             <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>

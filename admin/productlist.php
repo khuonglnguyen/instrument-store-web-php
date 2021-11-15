@@ -1,3 +1,14 @@
+<?php
+include '../lib/session.php';
+Session::checkSessionAdmin();
+$role_id = Session::get('role_id');
+if ($role_id == 1) {
+    # code...
+} else {
+    header("Location:../index.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +20,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Thêm mới sản phẩm</title>
+    <title>Admin</title>
 </head>
 
 <body>
@@ -20,41 +31,41 @@
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.html">Quản lý Sản phẩm</a></li>
+            <li><a href="productlist.html" class="active">Quản lý Sản phẩm</a></li>
             <li><a href="orderlist.html" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
-        <h1>Thêm mới sản phẩm</h1>
+        <h1>Danh sách sản phẩm</h1>
+    </div>
+    <div class="action">
+        <a href="add_product.php">Thêm mới</a>
     </div>
     <div class="container">
-        <div class="form-add">
-            <form action="#" method="post">
-                <label for="name">Tên sản phẩm</label>
-                <input type="text" id="name" name="name" placeholder="Tên sản phẩm..">
-            
-                <label for="price">Giá</label>
-                <input type="text" id="price" name="price" placeholder="Giá..">
-    
-                <label for="image">Hình ảnh</label>
-                <input type="file" id="image" name="image">
-            
-                <label for="country">Loại sản phẩm</label>
-                <select id="cate" name="cate">
-                  <option value="1">Điện thoại</option>
-                  <option value="2">Laptop</option>
-                  <option value="3">Tablet</option>
-                </select>
-    
-                <label for="qty">Số lượng</label>
-                <input type="number" id="qty" name="qty">
-    
-                <label for="des">Mô tả</label>
-                <textarea name="des" id="des" cols="30" rows="10"></textarea>
-              
-                <input type="submit" value="Lưu">
-              </form>
-        </div>
+        <table class="list">
+            <tr>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Đơn giá</th>
+                <th>Mô tả</th>
+                <th>Thao tác</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>OPPO A47</td>
+                <td><img class="image-cart" src="../images/oppo-a74-blue-9-600x600.jpg" alt=""></td>
+                <td>$499</td>
+                <td>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s.
+                </td>
+                <td>
+                    <a href="edit_product.html">Sửa</a>
+                    <a href="#">Xóa</a>
+                </td>
+            </tr>
+        </table>
     </div>
     </div>
     <footer>
