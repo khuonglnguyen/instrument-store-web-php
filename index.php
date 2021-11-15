@@ -2,7 +2,7 @@
 include 'classes/product.php';
 
 $product = new product();
-$list = mysqli_fetch_all($product->getAll(),MYSQLI_ASSOC);
+$list = mysqli_fetch_all($product->getAll(), MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $list = mysqli_fetch_all($product->getAll(),MYSQLI_ASSOC);
     </div>
     <div class="container">
         <?php
-        foreach ($list as $key => $value) {?>
+        foreach ($list as $key => $value) { ?>
             <div class="card">
                 <div class="imgBx">
                     <a href="single.html"><img src="admin/uploads/<?= $value['image'] ?>" alt=""></a>
@@ -64,7 +64,7 @@ $list = mysqli_fetch_all($product->getAll(),MYSQLI_ASSOC);
                         </a>
                     </div>
                     <div class="price">
-                    <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
+                        <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
                     </div>
                     <div class="rating">
                         <div class="rating">
@@ -77,7 +77,7 @@ $list = mysqli_fetch_all($product->getAll(),MYSQLI_ASSOC);
                     </div>
                     <div class="action">
                         <a class="add-cart">Thêm vào giỏ</a>
-                        <a class="detail">Xem chi tiết</a>
+                        <a class="detail" href="detail.php?id=<?= $value['id'] ?>">Xem chi tiết</a>
                     </div>
                 </div>
             </div>

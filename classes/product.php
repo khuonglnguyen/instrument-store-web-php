@@ -148,6 +148,13 @@ class product
         return $result;
     }
 
+    public function getProductbyId($id)
+    {
+        $query = "SELECT * FROM products where id = '$id' AND status = 1";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
     public function block($id)
     {
         $query = "UPDATE products SET status = 0 where id = '$id' ";

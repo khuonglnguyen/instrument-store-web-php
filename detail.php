@@ -1,3 +1,10 @@
+<?php
+include 'classes/product.php';
+
+$product = new product();
+$item = mysqli_fetch_all($product->getProductbyId($_GET['id']),MYSQLI_ASSOC)[0];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +27,10 @@
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="register.html" id="signup">Đăng ký</a></li>
-            <li><a href="login.html" id="signin">Đăng nhập</a></li>
-            <li><a href="order.html" id="order">Đơn hàng</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="register.php" id="signup">Đăng ký</a></li>
+            <li><a href="login.php" id="signin">Đăng nhập</a></li>
+            <li><a href="order.php" id="order">Đơn hàng</a></li>
             <li>
                 <a href="checkout.html">
                     <i class="fa fa-shopping-bag"></i>
@@ -40,17 +47,17 @@
     </div>
     <div class="container-single">
         <div class="image-product">
-            <img src="/images/oppo-a74-blue-9-600x600.jpg" alt="">
+            <img src="admin/uploads/<?= $item['image'] ?>" alt="">
         </div>
         <div class="info">
             <div class="name">
-                <h2>OPPO A47</h2>
+                <h2><?= $item['name'] ?></h2>
             </div>
             <div class="price-single">
-                Giá: <b>9.000.000đ</b>
+                Giá: <b><?= number_format($item['promotionPrice'], 0, '', ',') ?></b>
             </div>
             <div class="des">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <?= $item['des'] ?>
             </div>
             <div class="add-cart-single">
                     Thêm vào giỏ
