@@ -56,7 +56,7 @@ class product
         }
     }
 
-    public function getAll()
+    public function getAllAdmin()
     {
         $query =
             "SELECT products.*, categories.name as cateName, users.fullName
@@ -132,9 +132,31 @@ class product
 
     public function getProductbyId($id)
     {
-        $query = "SELECT * FROM products where id = '$id' ";
+        $query = "SELECT * FROM products where id = '$id' AND status != 0";
         $result = $this->db->select($query);
         return $result;
+    }
+
+    public function block($id)
+    {
+        $query = "UPDATE products SET status = 0 where id = '$id' ";
+        $result = $this->db->delete($query);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function active($id)
+    {
+        $query = "UPDATE products SET status = 1 where id = '$id' ";
+        $result = $this->db->delete($query);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>

@@ -8,8 +8,31 @@ if ($role_id == 1) {
 } else {
     header("Location:../index.php");
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $product = new product();
+    if (isset($_POST['block'])) {
+        $result = $product->block($_POST['id']);
+        if ($result) {
+            echo '<script type="text/javascript">alert("Khóa sản phẩm thành công!");</script>';
+        } else {
+            echo '<script type="text/javascript">alert("Khóa sản phẩm thất bại!");</script>';
+        }
+    } else if (isset($_POST['active'])) {
+        $result = $product->active($_POST['id']);
+        if ($result) {
+            echo '<script type="text/javascript">alert("Kích hoạt sản phẩm thành công!");</script>';
+        } else {
+            echo '<script type="text/javascript">alert("Kích hoạt sản phẩm thất bại!");</script>';
+        }
+    }else {
+        echo '<script type="text/javascript">alert("Có lỗi xảy ra!");</script>';
+        die();
+    }
+}
+
 $product = new product();
-$list = $product->getAll();
+$list = $product->getAllAdmin();
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +100,18 @@ $list = $product->getAll();
                         <td><?= ($value['status']) ? "Active" : "Block" ?></td>
                         <td>
                             <a href="edit_product.php?id=<?= $value['id'] ?>">Sửa</a>
-                            <a href="#">Xóa</a>
+                            <?php
+                            if ($value['status']) { ?>
+                                <form action="productlist.php" method="post">
+                                    <input type="text" name="id" hidden value="<?= $value['id'] ?>" style="display: none;">
+                                    <input type="submit" value="Khóa" name="block">
+                                </form>
+                            <?php } else { ?>
+                                <form action="productlist.php" method="post">
+                                    <input type="text" name="id" hidden value="<?= $value['id'] ?>" style="display: none;">
+                                    <input type="submit" value="Mở" name="active">
+                                </form>
+                            <?php } ?>
                         </td>
 
                     <?php } ?>
