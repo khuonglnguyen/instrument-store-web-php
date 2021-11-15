@@ -42,7 +42,7 @@ $userInfo = $user->get();
             <li>
                 <a href="checkout.php" class="active">
                     <i class="fa fa-shopping-bag"></i>
-                    <span class="sumItem">
+                    <span class="sumItem" id="totalQtyHeader">
                         <?= $totalQty['total'] ?>
                     </span>
                 </a>
@@ -90,10 +90,10 @@ $userInfo = $user->get();
                         Người đặt hàng: <b><?= $userInfo['fullname'] ?></b>
                     </div>
                     <div>
-                        Số lượng: <b><?= $totalQty['total'] ?></b>
+                        Số lượng: <b id="qtycart"><?= $totalQty['total'] ?></b>
                     </div>
                     <div>
-                        Tổng tiền: <b><?= number_format($totalPrice['total'], 0, '', ',') ?>vnđ</b>
+                        Tổng tiền: <b id="totalcart"><?= number_format($totalPrice['total'], 0, '', ',') ?>vnđ</b>
                     </div>
                     <div>
                         Địa chỉ nhận hàng: <b><?= $userInfo['address'] ?></b>
@@ -140,14 +140,29 @@ $userInfo = $user->get();
             var params = "productId=" + e.id + "&qty=" + e.value;
             http.open('POST', url, true);
 
-            //Send the proper header information along with the request
             http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-            http.onreadystatechange = function() { //Call a function when the state changes.
+            http.onreadystatechange = function() {
                 if (http.readyState === XMLHttpRequest.DONE) {
                     var status = http.status;
                     if (status === 0 || (status >= 200 && status < 400)) {
-                        // The request has been completed successfully
+                        var arr = http.responseText;
+                        var b = false;
+                        var result = "";
+                        for (let index = 0; index < arr.length; index++) {
+                            if (arr[index] == "[") {
+                                b = true;
+                            }
+                            if (b) {
+                                result += arr[index];
+                            }
+                        }
+                        var arrResult = JSON.parse(result.replace("undefined", ""));
+
+                        document.getElementById("totalQtyHeader").innerHTML = arrResult[1]['total'];
+                        document.getElementById("qtycart").innerHTML = arrResult[1]['total'];
+                        document.getElementById("totalcart").innerHTML = arrResult[0]['total'].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+"vnđ";
+
                         alert('Đã cập nhật giỏ hàng!');
                     } else {
                         alert('Cập nhật giỏ hàng thất bại!');
@@ -155,7 +170,7 @@ $userInfo = $user->get();
                 }
             }
             http.send(params);
-        }, 2000);
+        }, 500);
     }
 </script>
 

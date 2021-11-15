@@ -85,7 +85,7 @@ class cart
     public function getTotalPriceByUserId()
     {
         $userId = Session::get('userId');
-        $query = "SELECT SUM(productPrice) as total FROM cart WHERE userId = '$userId' ";
+        $query = "SELECT SUM(productPrice*qty) as total FROM cart WHERE userId = '$userId' ";
         $mysqli_result = $this->db->select($query);
         if ($mysqli_result) {
             $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC)[0];
