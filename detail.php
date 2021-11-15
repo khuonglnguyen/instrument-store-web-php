@@ -2,7 +2,12 @@
 include 'classes/product.php';
 
 $product = new product();
-$item = mysqli_fetch_all($product->getProductbyId($_GET['id']),MYSQLI_ASSOC)[0];
+$result=$product->getProductbyId($_GET['id']);
+if (!$result) {
+    echo 'Không tìm thấy sản phẩm!';
+    die();
+}
+$item = mysqli_fetch_all($result,MYSQLI_ASSOC)[0];
 ?>
 
 <!DOCTYPE html>

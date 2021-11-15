@@ -76,7 +76,7 @@ $list = mysqli_fetch_all($product->getAll(), MYSQLI_ASSOC);
                         </div>
                     </div>
                     <div class="action">
-                        <a class="add-cart">Thêm vào giỏ</a>
+                        <a class="add-cart" href="add_cart.php?id=<?= $value['id'] ?>">Thêm vào giỏ</a>
                         <a class="detail" href="detail.php?id=<?= $value['id'] ?>">Xem chi tiết</a>
                     </div>
                 </div>

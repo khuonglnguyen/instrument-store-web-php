@@ -150,9 +150,13 @@ class product
 
     public function getProductbyId($id)
     {
-        $query = "SELECT * FROM products where id = '$id' AND status = 1";
-        $result = $this->db->select($query);
-        return $result;
+        try {
+            $query = "SELECT * FROM products where id = '$id' AND status = 1";
+            $result = $this->db->select($query);
+            return $result;
+        } catch (\Throwable $th) {
+            return [];
+        }
     }
 
     public function block($id)
