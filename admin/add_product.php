@@ -36,8 +36,8 @@ if ($role_id == 1) {
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.html">Quản lý Sản phẩm</a></li>
-            <li><a href="orderlist.html" id="order">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php">Quản lý Sản phẩm</a></li>
+            <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">

@@ -14,6 +14,7 @@ body {
 }
 
 nav {
+  top: 0;
   background: #0082e6;
   height: 80px;
   width: 100%;
@@ -438,4 +439,8 @@ input[type=submit] {
 
 .error{
   color: red;
+}
+
+del {
+  text-decoration: line-through;
 }

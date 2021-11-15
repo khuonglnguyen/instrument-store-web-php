@@ -44,7 +44,7 @@ class product
         if ($name == '' || $originalPrice == "" || $promotionPrice == "" || $cateId == "" || $des == "" || $qty == "") {
         } else {
             move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('d/m/y') . "','$cateId','$qty','$des') ";
+            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('d/m/y') . "','$cateId','$qty','$des',1) ";
             $result = $this->db->insert($query);
             if ($result) {
                 $alert = "<span class='success'>Sản phẩm đã được thêm thành công</span>";
@@ -62,6 +62,17 @@ class product
             "SELECT products.*, categories.name as cateName, users.fullName
 			 FROM products INNER JOIN categories ON products.cateId = categories.id INNER JOIN users ON products.createdBy = users.id
 			 order by products.id desc ";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
+    public function getAll()
+    {
+        $query =
+            "SELECT products.*, categories.name as cateName, users.fullName
+			 FROM products INNER JOIN categories ON products.cateId = categories.id INNER JOIN users ON products.createdBy = users.id
+			 WHERE products.status = 1
+             order by products.id desc ";
         $result = $this->db->select($query);
         return $result;
     }
@@ -130,9 +141,9 @@ class product
         }
     }
 
-    public function getProductbyId($id)
+    public function getProductbyIdAdmin($id)
     {
-        $query = "SELECT * FROM products where id = '$id' AND status != 0";
+        $query = "SELECT * FROM products where id = '$id'";
         $result = $this->db->select($query);
         return $result;
     }

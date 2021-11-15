@@ -5,7 +5,7 @@ Session::checkSessionAdmin();
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
     $product = new product();
-    $productUpdate = mysqli_fetch_assoc($product->getProductbyId($_GET['id']));
+    $productUpdate = mysqli_fetch_assoc($product->getProductbyIdAdmin($_GET['id']));
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         $result = $product->update($_POST, $_FILES);
     }

@@ -1,3 +1,10 @@
+<?php
+include 'classes/product.php';
+
+$product = new product();
+$list = mysqli_fetch_all($product->getAll(),MYSQLI_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Trang chủ</title>
 </head>
 
 <body>
@@ -21,7 +28,7 @@
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.html" class="active">Trang chủ</a></li>
-            <?php  session_start();
+            <?php session_start();
             if (isset($_SESSION['user']) && $_SESSION['user']) { ?>
                 <li><a href="logout.php" id="signin">Đăng xuất</a></li>
             <?php } else { ?>
@@ -44,174 +51,38 @@
         <h1>Sảm phẩm nổi bật</h1>
     </div>
     <div class="container">
-        <div class="card">
-            <div class="imgBx">
-                <a href="single.html"><img src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></a>
-            </div>
-            <div class="content">
-                <div class="productName">
-                    <a href="single.html">
-                        <h3>OPPO A74</h3>
-                    </a>
+        <?php
+        foreach ($list as $key => $value) {?>
+            <div class="card">
+                <div class="imgBx">
+                    <a href="single.html"><img src="admin/uploads/<?= $value['image'] ?>" alt=""></a>
                 </div>
-                <div class="price">
-                    $499
-                </div>
-                <div class="rating">
+                <div class="content">
+                    <div class="productName">
+                        <a href="single.html">
+                            <h3><?= $value['name'] ?></h3>
+                        </a>
+                    </div>
+                    <div class="price">
+                    <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
+                    </div>
                     <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <a class="add-cart">Thêm vào giỏ</a>
+                        <a class="detail">Xem chi tiết</a>
                     </div>
                 </div>
-                <div class="action">
-                    <a class="add-cart">Thêm vào giỏ</a>
-                    <a class="detail">Xem chi tiết</a>
-                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <a href="single.html"><img src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></a>
-            </div>
-            <div class="content">
-                <div class="productName">
-                    <a href="single.html">
-                        <h3>OPPO A74</h3>
-                    </a>
-                </div>
-                <div class="price">
-                    $499
-                </div>
-                <div class="rating">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="action">
-                    <a class="add-cart">Thêm vào giỏ</a>
-                    <a class="detail">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <a href="single.html"><img src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></a>
-            </div>
-            <div class="content">
-                <div class="productName">
-                    <a href="single.html">
-                        <h3>OPPO A74</h3>
-                    </a>
-                </div>
-                <div class="price">
-                    $499
-                </div>
-                <div class="rating">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="action">
-                    <a class="add-cart">Thêm vào giỏ</a>
-                    <a class="detail">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <a href="single.html"><img src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></a>
-            </div>
-            <div class="content">
-                <div class="productName">
-                    <a href="single.html">
-                        <h3>OPPO A74</h3>
-                    </a>
-                </div>
-                <div class="price">
-                    $499
-                </div>
-                <div class="rating">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="action">
-                    <a class="add-cart">Thêm vào giỏ</a>
-                    <a class="detail">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <a href="single.html"><img src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></a>
-            </div>
-            <div class="content">
-                <div class="productName">
-                    <a href="single.html">
-                        <h3>OPPO A74</h3>
-                    </a>
-                </div>
-                <div class="price">
-                    $499
-                </div>
-                <div class="rating">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="action">
-                    <a class="add-cart">Thêm vào giỏ</a>
-                    <a class="detail">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <a href="single.html"><img src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></a>
-            </div>
-            <div class="content">
-                <div class="productName">
-                    <a href="single.html">
-                        <h3>OPPO A74</h3>
-                    </a>
-                </div>
-                <div class="price">
-                    $499
-                </div>
-                <div class="rating">
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                </div>
-                <div class="action">
-                    <a class="add-cart">Thêm vào giỏ</a>
-                    <a class="detail">Xem chi tiết</a>
-                </div>
-            </div>
-        </div>
+        <?php }
+        ?>
     </div>
     <footer>
         <div class="social">

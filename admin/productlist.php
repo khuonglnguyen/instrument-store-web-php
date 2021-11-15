@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             echo '<script type="text/javascript">alert("Kích hoạt sản phẩm thất bại!");</script>';
         }
-    }else {
+    } else {
         echo '<script type="text/javascript">alert("Có lỗi xảy ra!");</script>';
         die();
     }
@@ -85,14 +85,14 @@ $list = $product->getAllAdmin();
                     <th>Trạng thái</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr>
-                    <?php foreach ($list as $key => $value) { ?>
+                <?php foreach ($list as $key => $value) { ?>
+                    <tr>
                         <td><?= $count++ ?></td>
                         <td><?= $value['name'] ?></td>
                         <td><?= $value['cateName'] ?></td>
                         <td><img class="image-cart" src="uploads/<?= $value['image'] ?>" alt=""></td>
-                        <td><?= $value['originalPrice'] ?></td>
-                        <td><?= $value['promotionPrice'] ?></td>
+                        <td><?= number_format($value['originalPrice'], 0, '', ',')?> vnd</td>
+                        <td><?= $value['promotionPrice']?> vnd</td>
                         <td><?= $value['createdDate'] ?></td>
                         <td><?= $value['fullName'] ?></td>
                         <td><?= $value['qty'] ?></td>
@@ -113,9 +113,8 @@ $list = $product->getAllAdmin();
                                 </form>
                             <?php } ?>
                         </td>
-
-                    <?php } ?>
-                </tr>
+                    </tr>
+                <?php } ?>
             </table>
         <?php } else { ?>
             <h3>Chưa có sản phẩm nào...</h3>
