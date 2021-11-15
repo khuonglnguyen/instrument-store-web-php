@@ -1,5 +1,6 @@
 <?php
 include '../lib/session.php';
+include '../classes/product.php';
 Session::checkSessionAdmin();
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
@@ -7,6 +8,8 @@ if ($role_id == 1) {
 } else {
     header("Location:../index.php");
 }
+$product = new product();
+$list = $product->getAll();
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +34,8 @@ if ($role_id == 1) {
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.html" class="active">Quản lý Sản phẩm</a></li>
-            <li><a href="orderlist.html" id="order">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php" class="active">Quản lý Sản phẩm</a></li>
+            <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
@@ -42,30 +45,47 @@ if ($role_id == 1) {
         <a href="add_product.php">Thêm mới</a>
     </div>
     <div class="container">
-        <table class="list">
-            <tr>
-                <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Đơn giá</th>
-                <th>Mô tả</th>
-                <th>Thao tác</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>OPPO A47</td>
-                <td><img class="image-cart" src="../images/oppo-a74-blue-9-600x600.jpg" alt=""></td>
-                <td>$499</td>
-                <td>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s.
-                </td>
-                <td>
-                    <a href="edit_product.html">Sửa</a>
-                    <a href="#">Xóa</a>
-                </td>
-            </tr>
-        </table>
+        <?php $count = 1;
+        if ($list) { ?>
+            <table class="list">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th>Giá gốc</th>
+                    <th>Giá khuyến mãi</th>
+                    <th>Ngày tạo</th>
+                    <th>Tạo bởi</th>
+                    <th>Số lượng</th>
+                    <th>Mô tả</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+                <tr>
+                    <?php foreach ($list as $key => $value) { ?>
+                        <td><?= $count++ ?></td>
+                        <td><?= $value['name'] ?></td>
+                        <td><?= $value['cateName'] ?></td>
+                        <td><img class="image-cart" src="uploads/<?= $value['image'] ?>" alt=""></td>
+                        <td><?= $value['originalPrice'] ?></td>
+                        <td><?= $value['promotionPrice'] ?></td>
+                        <td><?= $value['createdDate'] ?></td>
+                        <td><?= $value['fullName'] ?></td>
+                        <td><?= $value['qty'] ?></td>
+                        <td><?= $value['des'] ?></td>
+                        <td><?= ($value['status']) ? "Active" : "Block" ?></td>
+                        <td>
+                            <a href="edit_product.php">Sửa</a>
+                            <a href="#">Xóa</a>
+                        </td>
+
+                    <?php } ?>
+                </tr>
+            </table>
+        <?php } else { ?>
+            <h3>Chưa có sản phẩm nào...</h3>
+        <?php } ?>
     </div>
     </div>
     <footer>
