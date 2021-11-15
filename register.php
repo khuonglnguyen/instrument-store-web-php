@@ -1,3 +1,11 @@
+<?php
+include 'classes/user.php';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $user = new user();
+    $result = $user->insert($_POST);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Register</title>
+    <title>Đăng ký</title>
 </head>
 
 <body>
@@ -20,10 +28,10 @@
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="register.html" id="signup" class="active">Đăng ký</a></li>
-            <li><a href="login.html" id="signin">Đăng nhập</a></li>
-            <li><a href="order.html" id="order">Đơn hàng</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="register.php" id="signup" class="active">Đăng ký</a></li>
+            <li><a href="login.php" id="signin">Đăng nhập</a></li>
+            <li><a href="order.php" id="order">Đơn hàng</a></li>
             <li>
                 <a href="checkout.html">
                     <i class="fa fa-shopping-bag"></i>
@@ -40,20 +48,27 @@
     </div>
     <div class="container-single">
         <div class="login">
-            <form action="#" method="post" class="form-login">
-                <label for="username">Tên đăng nhập</label>
-                <input type="text" id="username" name="username" placeholder="Tên đăng nhập...">
+            <?= !empty($result) ? $result : '' ?>
+            <form action="register.php" method="post" class="form-login">
+                <label for="fullName">Full name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Full name...">
 
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Email...">
-            
+
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password">
 
-                <label for="password">Nhập lại mật khẩu</label>
-                <input type="password" id="password" name="password">
+                <label for="repassword">Nhập lại mật khẩu</label>
+                <input type="password" id="repassword" name="repassword">
 
-                <input type="submit" value="Đăng ký">
+                <label for="address">Địa chỉ</label>
+                <textarea name="address" id="address" cols="30" rows="5"></textarea>
+
+                <label for="dob">Ngày sinh</label>
+                <input type="date" name="dob" id="dob">
+
+                <input type="submit" value="Đăng ký" name="submit">
             </form>
         </div>
     </div>

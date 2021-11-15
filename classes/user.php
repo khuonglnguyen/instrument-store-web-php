@@ -51,5 +51,34 @@ class user
 			}
 		}
 	}
+
+	public function insert($data)
+	{
+		$fullName = mysqli_real_escape_string($this->db->link, $data['fullName']);
+		$email = mysqli_real_escape_string($this->db->link, $data['email']);
+		$dob = mysqli_real_escape_string($this->db->link, $data['dob']);
+		$address = mysqli_real_escape_string($this->db->link, $data['address']);
+		$password = mysqli_real_escape_string($this->db->link, md5($data['password']));
+
+		if ($fullName == "" || $email == "" || $dob == "" || $email == "" || $password == "") {
+			$alert = '<span class="error">Vui lòng nhập vào đầy đủ thông tin tài khoản</span>';
+			return $alert;
+		} else {
+			$check_email = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+			$result_check = $this->db->select($check_email);
+			if ($result_check) {
+				$alert = '<span class="error">Email đã tồn tại</span>';
+				return $alert;
+			} else {
+				$query = "INSERT INTO users VALUES (NULL,'$email','$fullName','$dob','$password',2,1,'$address') ";
+				$result = $this->db->insert($query);
+				if ($result) {
+					return '<span class="success">Đăng ký tài khoản thành công!</span>';
+				} else {
+					return '<span class="error">Đăng ký tài khoản thất bại!</span>';
+				}
+			}
+		}
+	}
 }
 ?>

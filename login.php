@@ -30,12 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="register.html" id="signup">Đăng ký</a></li>
-            <li><a href="login.html" id="signin" class="active">Đăng nhập</a></li>
-            <li><a href="order.html" id="order">Đơn hàng</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="register.php" id="signup">Đăng ký</a></li>
+            <li><a href="login.php" id="signin" class="active">Đăng nhập</a></li>
+            <li><a href="order.php" id="order">Đơn hàng</a></li>
             <li>
-                <a href="checkout.html">
+                <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
                         10
