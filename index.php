@@ -21,8 +21,13 @@
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.html" class="active">Trang chủ</a></li>
-            <li><a href="register.html" id="signup">Đăng ký</a></li>
-            <li><a href="login.html" id="signin">Đăng nhập</a></li>
+            <?php  session_start();
+            if (isset($_SESSION['user']) && $_SESSION['user']) { ?>
+                <li><a href="logout.php" id="signin">Đăng xuất</a></li>
+            <?php } else { ?>
+                <li><a href="register.html" id="signup">Đăng ký</a></li>
+                <li><a href="login.php" id="signin">Đăng nhập</a></li>
+            <?php } ?>
             <li><a href="order.html" id="order">Đơn hàng</a></li>
             <li>
                 <a href="checkout.html">
@@ -45,7 +50,9 @@
             </div>
             <div class="content">
                 <div class="productName">
-                    <a href="single.html"><h3>OPPO A74</h3></a>
+                    <a href="single.html">
+                        <h3>OPPO A74</h3>
+                    </a>
                 </div>
                 <div class="price">
                     $499
@@ -71,7 +78,9 @@
             </div>
             <div class="content">
                 <div class="productName">
-                    <a href="single.html"><h3>OPPO A74</h3></a>
+                    <a href="single.html">
+                        <h3>OPPO A74</h3>
+                    </a>
                 </div>
                 <div class="price">
                     $499
@@ -97,7 +106,9 @@
             </div>
             <div class="content">
                 <div class="productName">
-                    <a href="single.html"><h3>OPPO A74</h3></a>
+                    <a href="single.html">
+                        <h3>OPPO A74</h3>
+                    </a>
                 </div>
                 <div class="price">
                     $499
@@ -123,7 +134,9 @@
             </div>
             <div class="content">
                 <div class="productName">
-                    <a href="single.html"><h3>OPPO A74</h3></a>
+                    <a href="single.html">
+                        <h3>OPPO A74</h3>
+                    </a>
                 </div>
                 <div class="price">
                     $499
@@ -149,7 +162,9 @@
             </div>
             <div class="content">
                 <div class="productName">
-                    <a href="single.html"><h3>OPPO A74</h3></a>
+                    <a href="single.html">
+                        <h3>OPPO A74</h3>
+                    </a>
                 </div>
                 <div class="price">
                     $499
@@ -175,7 +190,9 @@
             </div>
             <div class="content">
                 <div class="productName">
-                    <a href="single.html"><h3>OPPO A74</h3></a>
+                    <a href="single.html">
+                        <h3>OPPO A74</h3>
+                    </a>
                 </div>
                 <div class="price">
                     $499

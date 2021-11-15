@@ -45,9 +45,9 @@ class Session{
  }
 
  public static function destroy(){
+   self::init();
   session_destroy();
   header("Location:login.php");
  }
  // remove session
 }
-?>

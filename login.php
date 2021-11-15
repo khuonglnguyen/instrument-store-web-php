@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="container-single">
         <div class="login">
-            <form action="#" method="post" class="form-login">
-                <b><?= $login_check ?></b>
+            <form action="login.php" method="post" class="form-login">
                 <label for="username">Tên đăng nhập</label>
                 <input type="text" id="username" name="username" placeholder="Tên đăng nhập...">
 
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password">
+                <p style="color: red;"><?= !empty($login_check) ? $login_check : '' ?></p>
 
                 <input type="submit" value="Đăng nhập">
             </form>
