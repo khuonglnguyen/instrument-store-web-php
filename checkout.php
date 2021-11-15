@@ -1,3 +1,18 @@
+<?php
+include_once 'lib/session.php';
+Session::checkSession();
+include_once 'classes/cart.php';
+include_once 'classes/user.php';
+
+$cart = new cart();
+$list = $cart->get();
+$totalPrice = $cart->getTotalPriceByUserId();
+$totalQty = $cart->getTotalQtyByUserId();
+
+$user = new user();
+$userInfo = $user->get();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,15 +35,15 @@
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.html" >Trang chủ</a></li>
-            <li><a href="register.html" id="signup">Đăng ký</a></li>
-            <li><a href="login.html" id="signin">Đăng nhập</a></li>
-            <li><a href="order.html" id="order">Đơn hàng</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="register.php" id="signup">Đăng ký</a></li>
+            <li><a href="login.php" id="signin">Đăng nhập</a></li>
+            <li><a href="order.php" id="order">Đơn hàng</a></li>
             <li>
-                <a href="checkout.html" class="active">
+                <a href="checkout.php" class="active">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        3
+                        <?= $totalQty['total'] ?>
                     </span>
                 </a>
             </li>
@@ -39,6 +54,8 @@
         <h1>Giỏ hàng</h1>
     </div>
     <div class="container-single">
+        <?php
+        if ($list) { ?>
             <table class="order">
                 <tr>
                     <th>STT</th>
@@ -48,39 +65,48 @@
                     <th>Số lượng</th>
                     <th>Thao tác</th>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>OPPO A47</td>
-                    <td><img class="image-cart" src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></td>
-                    <td>$499</td>
-                    <td>
-                        <input type="number" name="qty" class="qty" value="3">
-                    </td>
-                    <td>
-                        <a href="#">Xóa</a>
-                    </td>
-                </tr>
+                <?php
+                $count = 1;
+                foreach ($list as $key => $value) { ?>
+                    <tr>
+                        <td><?= $count++ ?></td>
+                        <td><?= $value['productName'] ?></td>
+                        <td><img class="image-cart" src="admin/uploads/<?= $value['productImage'] ?>"></td>
+                        <td><?= number_format($value['productPrice'], 0, '', ',') ?></td>
+                        <td>
+                            <input id="<?= $value['productId'] ?>" type="number" name="qty" class="qty" value="<?= $value['qty'] ?>" onclick="update(this)">
+                        </td>
+                        <td>
+                            <a href="delete_cart.php?id=<?= $value['id'] ?>">Xóa</a>
+                        </td>
+                    </tr>
+                <?php }
+                ?>
             </table>
-        <div class="orderinfo">
-            <div class="buy">
-                <h3>Thông tin đơn đặt hàng</h3>
-                <div>
-                    Người đặt hàng: <b>Nguyễn Lập An Khương</b>
-                </div>
-                <div>
-                    Số lượng: <b>3</b>
-                </div>
-                <div>
-                    Tổng: <b>$1497</b>
-                </div>
-                <div>
-                    Địa chỉ nhận hàng: <b>146, KV4, Thuận An, Long Mỹ, Hậu Giang</b>
-                </div>
-                <div class="buy-btn">
-                    <a href="#">Tiến hành đặt hàng</a>
+            <div class="orderinfo">
+                <div class="buy">
+                    <h3>Thông tin đơn đặt hàng</h3>
+                    <div>
+                        Người đặt hàng: <b><?= $userInfo['fullname'] ?></b>
+                    </div>
+                    <div>
+                        Số lượng: <b><?= $totalQty['total'] ?></b>
+                    </div>
+                    <div>
+                        Tổng tiền: <b><?= number_format($totalPrice['total'], 0, '', ',') ?>vnđ</b>
+                    </div>
+                    <div>
+                        Địa chỉ nhận hàng: <b><?= $userInfo['address'] ?></b>
+                    </div>
+                    <div class="buy-btn">
+                        <a href="#">Tiến hành đặt hàng</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php } else { ?>
+            <h3>Giỏ hàng hiện đang rỗng</h3>
+        <?php }
+        ?>
     </div>
     </div>
     <footer>
@@ -106,5 +132,31 @@
         <p class="copyright">Khuong Nguyen @ 2021</p>
     </footer>
 </body>
+<script type="text/javascript">
+    function update(e) {
+        setTimeout(function() {
+            var http = new XMLHttpRequest();
+            var url = 'update_cart.php';
+            var params = "productId=" + e.id + "&qty=" + e.value;
+            http.open('POST', url, true);
+
+            //Send the proper header information along with the request
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            http.onreadystatechange = function() { //Call a function when the state changes.
+                if (http.readyState === XMLHttpRequest.DONE) {
+                    var status = http.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        // The request has been completed successfully
+                        alert('Đã cập nhật giỏ hàng!');
+                    } else {
+                        alert('Cập nhật giỏ hàng thất bại!');
+                    }
+                }
+            }
+            http.send(params);
+        }, 2000);
+    }
+</script>
 
 </html>

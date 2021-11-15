@@ -344,10 +344,6 @@ td{
   text-align: center;
 }
 
-.qty{
-  width: 40px;
-}
-
 .orderinfo{
   margin-left: 20px;
   background-color: ghostwhite;
@@ -443,4 +439,9 @@ input[type=submit] {
 
 del {
   text-decoration: line-through;
+}
+
+input[type=number]{
+  font-size: 18px;
+  width: 80px;
 }
