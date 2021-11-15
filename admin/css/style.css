@@ -237,3 +237,11 @@ footer .copyright{
   input[type=submit]:hover {
     background-color: deeppink;
   }
+
+  .success{
+    color: green;
+  }
+
+  .error{
+    color: red;
+  }

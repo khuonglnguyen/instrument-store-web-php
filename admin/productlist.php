@@ -76,7 +76,7 @@ $list = $product->getAll();
                         <td><?= $value['des'] ?></td>
                         <td><?= ($value['status']) ? "Active" : "Block" ?></td>
                         <td>
-                            <a href="edit_product.php">Sửa</a>
+                            <a href="edit_product.php?id=<?= $value['id'] ?>">Sửa</a>
                             <a href="#">Xóa</a>
                         </td>
 
