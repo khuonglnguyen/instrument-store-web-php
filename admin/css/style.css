@@ -1,249 +1,236 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr');
 
-* {
-  padding: 0;
+*{ 
   margin: 0;
-  text-decoration: none;
-  list-style: none;
+  padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+:root{
+  --blue:#287bff;
+  --white:#fff;
+  --grey:#f5f5f5;
+  --black1:#222;
+  --black2:#999;
+
 }
 
-body {
-    font-family: Mitr;
-  background: rgb(240, 234, 234);
+body{ 
+  min-height: 100vh;
+  overflow-x: hidden;
 }
+.container{
+  position: relative;
+  width: 100%;
 
-nav {
+}
+.navigation{
+  position:fixed;
+  width: 300px;
+  height: 100%;
+  background: var(--blue);
+  border-left: 10px solid var(--blue);
+  transition: 0.5s;
+  overflow: hidden;
+}
+.navigation.active{
+  width: 80px;
+}
+.navigation ul{
+  position: absolute;
   top: 0;
-  background: #c00277;
-  position: fixed;
-  height: 80px;
+  left: 0;
   width: 100%;
 }
-
-label.logo {
-  color: white;
-  font-size: 35px;
-  line-height: 80px;
-  padding: 0 35px;
+.navigation ul li{
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
 }
-
-nav ul {
-  float: right;
-  margin-right: 20px;
+.navigation ul li:hover,
+.navigation ul li.hovered{
+  background: var(--white);
 }
-
-nav ul li {
-  display: inline-block;
-  line-height: 80px;
-  margin: 0 5px;
+.navigation ul li:nth-child(1){
+  margin-bottom: 30px;
+  pointer-events: none;
 }
-
-nav ul li a {
-  color: white;
-  font-size: 17px;
-  padding: 7px 13px;
-  border-radius: 3px;
-  text-transform: uppercase;
-  border-radius: 5px;
-  transition: 0.5s;
+.navigation ul li a{
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: var(--white);
 }
-
-a.active,
-a:hover {
-  background: white;
-  color: mediumvioletred;
+.navigation ul li:hover a,
+.navigation ul li.hovered a{
+  color: var(--blue);
 }
-
-.checkbtn{
-    font-size: 30px;
-    color: white;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-}
-
-#check{
-    display: none;
-}
-
-@media(max-width: 952px) {
-    label.logo{
-        font-size: 30px;
-        padding-left: 50px;
-    }
-    nav ul li a{
-        font-size: 16px;
-
-    }
-}
-
-@media(max-width: 858px) {
-    .checkbtn{
-        display: block;
-    }
-    ul{
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background: #2c3e50;
-        top: 80px;
-        left: -100%;
-        text-align:center;
-        transition: all .5s;
-    }
-    nav ul li{
-        display: block;
-        margin: 50px;
-        line-height: 30px;
-    }
-    nav ul li a{
-        font-size: 20px;
-    }
-    a:hover,a.active{
-        background: none;
-        color: #c00277;
-    }
-    #check:checked ~ ul{
-        left: 0;
-    }
-}
-
-.container{
-    height: auto;
-}
-
-.title{
-    background-color: white;
-}
-
-footer {
-  padding: 50px 0;
-  background-color:violet;
-}
-
-footer .social{
+.navigation ul li a .nav-icon{
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 30px;   
   text-align: center;
-  padding-bottom: 25px;
-  color: white;
+}
+.navigation ul li a .nav-icon ion-icon{
+  margin-top: 25%;
+  font-size: 1.75em;
+}
+.navigation ul li a .nav-title{
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+/* curve outside */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  background: transparent;
+  box-shadow: 35px 35px 0 10px var(--white);
+  pointer-events: none;
+}
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25%;
+  background: transparent;
+  box-shadow: 35px -35px 0 10px var(--white);
+  pointer-events: none;
 }
 
-footer .social a{
-  color: inherit;
-  font-size: 24px;
-  border: 1px solid #c00277;
+.main{
+  position: absolute;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  background: var(--white);
+}
+.main.active{
+  width: calc(100% - 80px);
+  left: 80px;
+}
+.topbar{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0 10px;
+}
+.topbar-togle{
+  position: relative;
+  color:var(--black2);
+  top: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.topbar-search{
+  position: relative;
+  width: 400px;
+  margin: 10px;
+}
+.topbar-search label{
+  position: relative;
+  width: 100%;
+}
+.topbar-search label input{
+  width: 100%;
+  height: 40px;
+  border-radius: 25px;
+  padding: 10px 20px;
+  padding-left: 35px;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid var(--black2);
+}
+.topbar-search label ion-icon{
+  position: absolute;
+  color:var(--black2);
+  top: 0;
+  left: 10px;
+  font-size: 1.2em;
+}
+.topbar-user{
+  position: relative;
+  margin: 10px;
   width: 40px;
   height: 40px;
-  list-style: 40px;
-  display: inline-block;
-  text-align: center;
   border-radius: 50%;
-  margin: 0 8px;
-  opacity: 0.75;
-  transition: 0.5s;
-  background-color: white;
-  color: #c00277;
+  overflow: hidden;
+  cursor: pointer;
+}
+.topbar-user img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-footer .social a:hover{
-  opacity: 0.9;
+.cardBox{
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-gap:30px
 }
-
-footer ul{
-  margin-top: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 0;
-  text-align: center;
+.cardBox .card{
+  position: relative;
+  background: var(--white);
+  cursor: pointer;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
 }
-
-footer ul a{
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.8;
+.cardBox .card .card-number{
+  position: relative;
+  font-weight: 500;
+  font-size: 2.5em;
+  color: var(--blue);
 }
-
-footer ul li{
-  display: inline-block;
-  padding: 0 15px;
+.cardBox .card .cardName{
+  color: var(--black2);
+  font-size: 1.1em;
+  margin-top: 5px;
 }
-
-footer ul li a:hover{
-  opacity: 1;
-  color: #070808;
+.cardBox .card .card-icon{
+  font-size: 3.5em;
+  color: var(--black2);
 }
-
-footer .copyright{
-  margin-top: 15px;
-  text-align: center;
-  font-size: 12px;
-  color: c00277;
+.cardBox .card:hover{
+  background: var(--blue);
 }
-
-.list{
-    width: 100%;
-    background-color: ghostwhite;
-    padding: 10px;
-  }
-
-  .image-cart{
-    height: 100px;
-    width: 100px;
-  }
-
-  th{
-    background-color:  plum;
-    border: 1px solid mediumvioletred;
-  }
-  
-  td{
-    border: 1px solid mediumvioletred;
-    text-align: center;
-  }
-
-  .product-list{
-      padding-top: 1000px;
-  }
-
-  .form-add{
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 10px 400px;
-  }
-
-  input[type=text], input[type=file], input[type=number], textarea, select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  input[type=submit] {
-    width: 100%;
-    background-color: mediumvioletred;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  input[type=submit]:hover {
-    background-color: deeppink;
-  }
-
-  .success{
-    color: green;
-  }
-
-  .error{
-    color: red;
-  }
+.cardBox .card:hover .card-number,
+.cardBox .card:hover .cardName,
+.cardBox .card:hover .card-icon{
+  color: var(--white);
+}
