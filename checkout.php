@@ -33,7 +33,7 @@ $userInfo = $user->get();
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <label class="logo">STORENOW</label>
+        <label class="logo" id="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
             <li><a href="register.php" id="signup">Đăng ký</a></li>
@@ -74,7 +74,7 @@ $userInfo = $user->get();
                         <td><img class="image-cart" src="admin/uploads/<?= $value['productImage'] ?>"></td>
                         <td><?= number_format($value['productPrice'], 0, '', ',') ?></td>
                         <td>
-                            <input id="<?= $value['productId'] ?>" type="number" name="qty" class="qty" value="<?= $value['qty'] ?>" onclick="update(this)">
+                            <input id="<?= $value['productId'] ?>" type="number" name="qty" class="qty" value="<?= $value['qty'] ?>" onchange="update(this)" min="1">
                         </td>
                         <td>
                             <a href="delete_cart.php?id=<?= $value['id'] ?>">Xóa</a>
@@ -134,43 +134,53 @@ $userInfo = $user->get();
 </body>
 <script type="text/javascript">
     function update(e) {
-        setTimeout(function() {
-            var http = new XMLHttpRequest();
-            var url = 'update_cart.php';
-            var params = "productId=" + e.id + "&qty=" + e.value;
-            http.open('POST', url, true);
+        var http = new XMLHttpRequest();
+        var url = 'update_cart.php';
+        var params = "productId=" + e.id + "&qty=" + e.value;
+        http.open('POST', url, true);
 
-            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-            http.onreadystatechange = function() {
-                if (http.readyState === XMLHttpRequest.DONE) {
-                    var status = http.status;
-                    if (status === 0 || (status >= 200 && status < 400)) {
-                        var arr = http.responseText;
-                        var b = false;
-                        var result = "";
-                        for (let index = 0; index < arr.length; index++) {
-                            if (arr[index] == "[") {
-                                b = true;
-                            }
-                            if (b) {
-                                result += arr[index];
-                            }
+        http.onreadystatechange = function() {
+            if (http.readyState === XMLHttpRequest.DONE) {
+                var status = http.status;
+                if (status === 0 || (status >= 200 && status < 400)) {
+                    var arr = http.responseText;
+                    var b = false;
+                    var result = "";
+                    for (let index = 0; index < arr.length; index++) {
+                        if (arr[index] == "[") {
+                            b = true;
                         }
-                        var arrResult = JSON.parse(result.replace("undefined", ""));
-
-                        document.getElementById("totalQtyHeader").innerHTML = arrResult[1]['total'];
-                        document.getElementById("qtycart").innerHTML = arrResult[1]['total'];
-                        document.getElementById("totalcart").innerHTML = arrResult[0]['total'].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")+"vnđ";
-
-                        alert('Đã cập nhật giỏ hàng!');
-                    } else {
-                        alert('Cập nhật giỏ hàng thất bại!');
+                        if (b) {
+                            result += arr[index];
+                        }
                     }
+                    var arrResult = JSON.parse(result.replace("undefined", ""));
+
+                    document.getElementById("totalQtyHeader").innerHTML = arrResult[1]['total'];
+                    document.getElementById("qtycart").innerHTML = arrResult[1]['total'];
+                    document.getElementById("totalcart").innerHTML = arrResult[0]['total'].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "vnđ";
+
+                    //alert('Đã cập nhật giỏ hàng!');
+                } else if (status === 0 || status == 501) {
+                    alert('Số lượng sản phẩm không đủ!');
+                    e.value = parseInt(e.value) - 1;
+                } else {
+                    alert('Cập nhật giỏ hàng thất bại!');
+                    window.location.reload();
                 }
             }
-            http.send(params);
-        }, 500);
+
+        }
+        http.send(params);
+    }
+
+    var list = document.getElementsByClassName("qty");
+    for (let item of list) {
+        item.addEventListener("keypress", function(evt) {
+            evt.preventDefault();
+        });
     }
 </script>
 

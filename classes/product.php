@@ -150,13 +150,13 @@ class product
 
     public function getProductbyId($id)
     {
-        try {
-            $query = "SELECT * FROM products where id = '$id' AND status = 1";
-            $result = $this->db->select($query);
+        $query = "SELECT * FROM products where id = '$id' AND status = 1";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC)[0];
             return $result;
-        } catch (\Throwable $th) {
-            return [];
         }
+        return false;
     }
 
     public function block($id)

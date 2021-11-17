@@ -3,6 +3,7 @@ $filepath = realpath(dirname(__FILE__));
 include_once($filepath . '/../lib/database.php');
 include_once($filepath . '/../lib/session.php');
 include_once($filepath . '/../helpers/format.php');
+include_once($filepath . '/../classes/product.php');
 ?>
 
 
@@ -30,9 +31,17 @@ class cart
         $productName = $result["name"];
         $productPrice = $result["promotionPrice"];
         $image = $result["image"];
-        $checkcart = "SELECT * FROM cart WHERE productId = '$productId' AND userId = '$userId' ";
+        $checkcart = "SELECT qty FROM cart WHERE productId = '$productId' AND userId = '$userId' ";
         $check_cart = $this->db->select($checkcart);
         if (is_a($check_cart, 'mysqli_result')) {
+            //Check qty product in db
+            $qtyInCart = mysqli_fetch_row($check_cart)[0];
+            $product = new product();
+            $productCheck = $product->getProductbyId($productId);
+            if (intval($qtyInCart) >= intval($productCheck['qty'])) {
+                return 'out of stock';
+            }
+
             $query_insert = "UPDATE cart SET qty = qty + 1 WHERE productId = $productId";
             $insert_cart = $this->db->update($query_insert);
             if ($insert_cart) {
@@ -53,6 +62,13 @@ class cart
     public function update($productId, $qty)
     {
         $userId = Session::get('userId');
+        //Check qty product in db
+        $product = new product();
+        $productCheck = $product->getProductbyId($productId);
+        if (intval($qty) > intval($productCheck['qty'])) {
+            return 'out of stock';
+        }
+
         $query_insert = "UPDATE cart SET qty = $qty WHERE productId = $productId AND userId = $userId";
         $insert_cart = $this->db->update($query_insert);
         if ($insert_cart) {
