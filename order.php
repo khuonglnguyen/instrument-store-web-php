@@ -1,3 +1,17 @@
+<?php
+include_once 'lib/session.php';
+Session::checkSession();
+include 'classes/order.php';
+include_once 'classes/cart.php';
+
+$cart = new cart();
+$totalQty = $cart->getTotalQtyByUserId();
+
+$order = new order();
+$result = $order->getOrder();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,15 +34,15 @@
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="register.html" id="signup">Đăng ký</a></li>
-            <li><a href="login.html" id="signin">Đăng nhập</a></li>
-            <li><a href="order.html" id="order" class="active">Đơn hàng</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="register.php" id="signup">Đăng ký</a></li>
+            <li><a href="login.php" id="signin">Đăng nhập</a></li>
+            <li><a href="order.php" id="order" class="active">Đơn hàng</a></li>
             <li>
-                <a href="checkout.html">
+                <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        3
+                    <?= $totalQty['total'] ?>
                     </span>
                 </a>
             </li>
@@ -36,31 +50,37 @@
     </nav>
     <section class="banner"></section>
     <div class="featuredProducts">
-        <h1>Chi tiết đơn hàng DH0001</h1>
+        <h1>Đơn hàng</h1>
     </div>
     <div class="container-single">
-        <table class="order">
-            <tr>
-                <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Đơn giá</th>
-                <th>Số lượng</th>
-                <th>Thao tác</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>OPPO A47</td>
-                <td><img class="image-cart" src="./images/oppo-a74-blue-9-600x600.jpg" alt=""></td>
-                <td>$499</td>
-                <td>
-                    <input type="number" name="qty" class="qty" value="3">
-                </td>
-                <td>
-                    <a href="#">Xóa</a>
-                </td>
-            </tr>
-        </table>
+        <?php if ($result) { ?>
+            <table class="order">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Ngày giao</th>
+                    <th>Tình trạng</th>
+                    <th>Thao tác</th>
+                </tr>
+                <?php $count = 1;
+                foreach ($result as $key => $value) { ?>
+                    <tr>
+                        <td><?= $count++ ?></td>
+                        <td><?= $value['id'] ?></td>
+                        <td><?= $value['createdDate'] ?></td>
+                        <td><?= $value['createdDate'] ?></td>
+                        <td><?= $value['status'] ?></td>
+                        <td>
+                            <a href="orderdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </table>
+        <?php } else { ?>
+            <h3>Đơn hàng hiện đang rỗng</h3>
+        <?php } ?>
+
 
     </div>
     </div>

@@ -99,7 +99,7 @@ $userInfo = $user->get();
                         Địa chỉ nhận hàng: <b><?= $userInfo['address'] ?></b>
                     </div>
                     <div class="buy-btn">
-                        <a href="#">Tiến hành đặt hàng</a>
+                        <a href="add_order.php">Tiến hành đặt hàng</a>
                     </div>
                 </div>
             </div>

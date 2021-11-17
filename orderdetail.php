@@ -1,3 +1,16 @@
+<?php
+include_once 'lib/session.php';
+Session::checkSession();
+include_once 'classes/cart.php';
+include_once 'classes/orderDetails.php';
+
+$cart=new cart();
+$orderDetails=new orderDetails();
+
+$totalQty = $cart->getTotalQtyByUserId();
+$result = $orderDetails->getOrderDetails($_GET['orderId']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,15 +33,15 @@
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.html">Trang chủ</a></li>
-            <li><a href="register.html" id="signup">Đăng ký</a></li>
-            <li><a href="login.html" id="signin">Đăng nhập</a></li>
-            <li><a href="order.html" id="order" class="active">Đơn hàng</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="register.php" id="signup">Đăng ký</a></li>
+            <li><a href="login.php" id="signin">Đăng nhập</a></li>
+            <li><a href="order.php" id="order" class="active">Đơn hàng</a></li>
             <li>
-                <a href="checkout.html">
+                <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        3
+                    <?= $totalQty['total'] ?>
                     </span>
                 </a>
             </li>
@@ -36,29 +49,28 @@
     </nav>
     <section class="banner"></section>
     <div class="featuredProducts">
-        <h1>Đơn hàng</h1>
+        <h1>Chi tiết đơn hàng DH0001</h1>
     </div>
     <div class="container-single">
         <table class="order">
             <tr>
                 <th>STT</th>
-                <th>Mã đơn hàng</th>
-                <th>Ngày đặt</th>
-                <th>Ngày giao</th>
-                <th>Tình trạng</th>
-                <th>Thao tác</th>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>DH0001</td>
-                <td>01/01/2021</td>
-                <td>05/01/2021</td>
-                <td>Đã nhận</td>
-                <td>
-                    <a href="orderdetail.html">Chi tiết</a>
-                    <a href="#">Xem đánh giá</a>
-                </td>
+            <?php $count=1;
+            foreach ($result as $key => $value) { ?> 
+                <tr>
+                <td><?= $count++ ?></td>
+                <td><?= $value['productName'] ?></td>
+                <td><img class="image-cart" src="admin/uploads/<?= $value['productImage'] ?>" alt=""></td>
+                <td><?= $value['productPrice'] ?></td>
+                <td><?= $value['qty'] ?></td>
             </tr>
+           <?php }
+            ?>
         </table>
 
     </div>
