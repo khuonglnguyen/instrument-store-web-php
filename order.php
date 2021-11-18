@@ -8,7 +8,7 @@ $cart = new cart();
 $totalQty = $cart->getTotalQtyByUserId();
 
 $order = new order();
-$result = $order->getOrder();
+$result = $order->getOrderByUser();
 
 ?>
 
@@ -42,7 +42,7 @@ $result = $order->getOrder();
                 <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                    <?= $totalQty['total'] ?>
+                        <?= $totalQty['total'] ?>
                     </span>
                 </a>
             </li>
@@ -70,10 +70,23 @@ $result = $order->getOrder();
                         <td><?= $value['id'] ?></td>
                         <td><?= $value['createdDate'] ?></td>
                         <td><?= $value['createdDate'] ?></td>
-                        <td><?= $value['status'] ?></td>
-                        <td>
-                            <a href="orderdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
-                        </td>
+                        <?php
+                        if ($value['status'] == 'Delivering') { ?>
+                            <td>
+                                <a href="complete_order.php?orderId=<?= $value['id'] ?>">Đang giao (Click vào để xác nhận đã nhận)</a>
+                            </td>
+                            <td>
+                                <a href="orderdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
+                            </td>
+                        <?php } else { ?>
+                            <td>
+                                <?= $value['status'] ?>
+                            </td>
+                            <td>
+                                <a href="orderdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
+                            </td>
+                        <?php }
+                        ?>
                     </tr>
                 <?php } ?>
             </table>

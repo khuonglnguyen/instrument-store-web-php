@@ -4,6 +4,7 @@ include_once($filepath . '/../lib/database.php');
 include_once($filepath . '/../lib/session.php');
 include_once($filepath . '/../helpers/format.php');
 include_once($filepath . '/../classes/cart.php');
+include_once($filepath . '/../classes/product.php');
 ?>
 
 
@@ -42,11 +43,18 @@ class order
             $orderId = mysqli_fetch_row($get_cart_last_id)[0];
         }
 
+        //Update product qty
+        $product = new product();
         foreach ($cart_user as $key => $value) {
             //Add item cart to order detail
             $sql_insert_order_details = "INSERT INTO order_details VALUES(NULL,'$orderId'," . $value['productId'] . "," . $value['qty'] . "," . $value['productPrice'] . ",'" . $value['productName'] . "','" . $value['productImage'] . "')";
             $insert_order_details = $this->db->insert($sql_insert_order_details);
             if (!$insert_order_details) {
+                return false;
+            }
+
+            $product->updateQty($value['productId'], $value['qty']);
+            if (!$product) {
                 return false;
             }
         }
@@ -61,7 +69,7 @@ class order
         return false;
     }
 
-    public function getOrder()
+    public function getOrderByUser()
     {
         $userId = Session::get('userId');
         $query = "SELECT * FROM orders WHERE userId = '$userId' ";
@@ -69,6 +77,80 @@ class order
         if ($mysqli_result) {
             $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC);
             return $result;
+        }
+        return false;
+    }
+
+    public function getProcessingOrder()
+    {
+        $query = "SELECT * FROM orders WHERE status = 'Processing'";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC);
+            return $result;
+        }
+        return false;
+    }
+
+    public function getProcessedOrder()
+    {
+        $query = "SELECT * FROM orders WHERE status = 'Processed'";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC);
+            return $result;
+        }
+        return false;
+    }
+
+    public function getDeliveringOrder()
+    {
+        $query = "SELECT * FROM orders WHERE status = 'Delivering'";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC);
+            return $result;
+        }
+        return false;
+    }
+
+    public function getCompleteOrder()
+    {
+        $query = "SELECT * FROM orders WHERE status = 'Complete'";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC);
+            return $result;
+        }
+        return false;
+    }
+    
+    public function processedOrder($id)
+    {
+        $query = "UPDATE orders SET status = 'Processed' WHERE id = $id";
+        $mysqli_result = $this->db->update($query);
+        if ($mysqli_result) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deliveringOrder($id)
+    {
+        $query = "UPDATE orders SET status = 'Delivering' WHERE id = $id";
+        $mysqli_result = $this->db->update($query);
+        if ($mysqli_result) {
+            return true;
+        }
+        return false;
+    }
+
+    public function completeOrder($id)
+    {
+        $query = "UPDATE orders SET status = 'Complete' WHERE id = $id";
+        $mysqli_result = $this->db->update($query);
+        if ($mysqli_result) {
+            return true;
         }
         return false;
     }

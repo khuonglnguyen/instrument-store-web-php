@@ -180,5 +180,15 @@ class product
             return false;
         }
     }
+
+    public function updateQty($id,$qty)
+    {
+        $query = "UPDATE products SET qty = qty - $qty WHERE id = $id";
+        $mysqli_result = $this->db->update($query);
+        if ($mysqli_result) {
+            return true;
+        }
+        return false;
+    }
 }
 ?>

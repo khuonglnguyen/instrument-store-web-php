@@ -16,7 +16,6 @@ body {
 nav {
   top: 0;
   background: #c00277;
-  position: fixed;
   height: 80px;
   width: 100%;
 }

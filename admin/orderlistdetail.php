@@ -1,3 +1,12 @@
+<?php
+include_once '../lib/session.php';
+Session::checkSessionAdmin();
+include '../classes/orderDetails.php';
+
+$orderDetails = new orderDetails();
+$result = $orderDetails->getOrderDetails($_GET['orderId']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,32 +29,42 @@
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.html">Quản lý Sản phẩm</a></li>
-            <li><a href="orderlist.html" id="order" class="active">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php">Quản lý Sản phẩm</a></li>
+            <li><a href="orderlist.php" id="order" class="active">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
         <h1>Chi tiết đơn đặt hàng DH0001</h1>
     </div>
     <div class="container">
-        <table class="list">
-            <tr>
-                <th>STT</th>
-                <th>Tên sản phẩm</th>
-                <th>Hình ảnh</th>
-                <th>Đơn giá</th>
-                <th>Số lượng</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>OPPO A47</td>
-                <td><img class="image-cart" src="../images/oppo-a74-blue-9-600x600.jpg" alt=""></td>
-                <td>$499</td>
-                <td>
-                    3
-                </td>
-            </tr>
-        </table>
+        <?php
+        if ($result) { ?>
+            <table class="list">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình ảnh</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                </tr>
+                <?php $count = 1;
+                foreach ($result as $key => $value) { ?>
+                    <tr>
+                        <td><?= $count++ ?></td>
+                        <td><?= $value['productName'] ?></td>
+                        <td><img class="image-cart" src="uploads/<?= $value['productImage'] ?>" alt=""></td>
+                        <td><?= $value['productPrice'] ?></td>
+                        <td><?= $value['qty'] ?></td>
+                            
+                    </tr>
+                <?php }
+                ?>
+            </table>
+            <a href="processed_order.php?orderId=<?= $_GET['orderId'] ?>">Xác nhận</a>
+        <?php } else { ?>
+            <h3>Chưa có đơn hàng nào đang xử lý</h3>
+        <?php }
+        ?>
     </div>
     </div>
     <footer>
