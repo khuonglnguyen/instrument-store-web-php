@@ -319,6 +319,12 @@ footer .copyright{
   margin-top: 20px;
 }
 
+.add-cart-single a:hover{
+  transition: 0.5s;
+  background-color: goldenrod;
+  cursor: pointer;
+}
+
 .add-cart-single:hover{
   transition: 0.5s;
   background-color: goldenrod;

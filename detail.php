@@ -1,5 +1,9 @@
 <?php
 include 'classes/product.php';
+include_once 'classes/cart.php';
+
+$cart = new cart();
+$totalQty = $cart->getTotalQtyByUserId();
 
 $product = new product();
 $result=$product->getProductbyId($_GET['id']);
@@ -7,7 +11,6 @@ if (!$result) {
     echo 'Không tìm thấy sản phẩm!';
     die();
 }
-$item = mysqli_fetch_all($result,MYSQLI_ASSOC)[0];
 ?>
 
 <!DOCTYPE html>
@@ -37,10 +40,10 @@ $item = mysqli_fetch_all($result,MYSQLI_ASSOC)[0];
             <li><a href="login.php" id="signin">Đăng nhập</a></li>
             <li><a href="order.php" id="order">Đơn hàng</a></li>
             <li>
-                <a href="checkout.html">
+                <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        10
+                    <?= ($totalQty['total']) ? $totalQty['total'] : "0" ?>
                     </span>
                 </a>
             </li>
@@ -52,20 +55,20 @@ $item = mysqli_fetch_all($result,MYSQLI_ASSOC)[0];
     </div>
     <div class="container-single">
         <div class="image-product">
-            <img src="admin/uploads/<?= $item['image'] ?>" alt="">
+            <img src="admin/uploads/<?= $result['image'] ?>" alt="">
         </div>
         <div class="info">
             <div class="name">
-                <h2><?= $item['name'] ?></h2>
+                <h2><?= $result['name'] ?></h2>
             </div>
             <div class="price-single">
-                Giá: <b><?= number_format($item['promotionPrice'], 0, '', ',') ?></b>
+                Giá: <b><?= number_format($result['promotionPrice'], 0, '', ',') ?></b>
             </div>
             <div class="des">
-            <?= $item['des'] ?>
+            <?= $result['des'] ?>
             </div>
             <div class="add-cart-single">
-                    Thêm vào giỏ
+                  <a href="add_cart.php?id=<?= $result['id'] ?>">Thêm vào giỏ</a>  
             </div>
         </div>
     </div>

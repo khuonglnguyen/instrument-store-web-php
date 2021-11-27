@@ -81,6 +81,17 @@ class order
         return false;
     }
 
+    public function getById($id)
+    {
+        $query = "SELECT * FROM orders WHERE id = '$id' ";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $result = mysqli_fetch_all($this->db->select($query), MYSQLI_ASSOC)[0];
+            return $result;
+        }
+        return false;
+    }
+
     public function getProcessingOrder()
     {
         $query = "SELECT * FROM orders WHERE status = 'Processing'";

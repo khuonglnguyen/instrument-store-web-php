@@ -246,3 +246,7 @@ footer .copyright{
   .error{
     color: red;
   }
+
+  .tabcontent{
+    height: 300px;
+  }

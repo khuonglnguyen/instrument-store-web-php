@@ -2,9 +2,12 @@
 include_once '../lib/session.php';
 Session::checkSessionAdmin();
 include '../classes/orderDetails.php';
+include '../classes/order.php';
 
 $orderDetails = new orderDetails();
 $result = $orderDetails->getOrderDetails($_GET['orderId']);
+$order = new order();
+$order_result = $order->getById($result[0]['orderId']);
 ?>
 
 <!DOCTYPE html>
@@ -55,12 +58,16 @@ $result = $orderDetails->getOrderDetails($_GET['orderId']);
                         <td><img class="image-cart" src="uploads/<?= $value['productImage'] ?>" alt=""></td>
                         <td><?= $value['productPrice'] ?></td>
                         <td><?= $value['qty'] ?></td>
-                            
+
                     </tr>
                 <?php }
                 ?>
             </table>
-            <a href="processed_order.php?orderId=<?= $_GET['orderId'] ?>">Xác nhận</a>
+            <?php
+            if ($order_result['status'] == 'Processing') { ?>
+                <a href="processed_order.php?orderId=<?= $_GET['orderId'] ?>">Xác nhận</a>
+            <?php }
+            ?>
         <?php } else { ?>
             <h3>Chưa có đơn hàng nào đang xử lý</h3>
         <?php }

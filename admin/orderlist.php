@@ -110,7 +110,7 @@ $completeOrderList = $order->getCompleteOrder();
                     ?>
                 </table>
             <?php } else { ?>
-                <h3>Chưa có đơn hàng nào đang xử lý</h3>
+                <h3>Chưa có đơn hàng nào đã xử lý</h3>
             <?php }
             ?>
         </div>
@@ -136,14 +136,14 @@ $completeOrderList = $order->getCompleteOrder();
                             <td><?= $value['createdDate'] ?></td>
                             <td><?= $value['status'] ?></td>
                             <td>
-                                <a href="orderdetail.html">Chi tiết</a>
+                                <a href="orderlistdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
                             </td>
                         </tr>
                     <?php }
                     ?>
                 </table>
             <?php } else { ?>
-                <h3>Chưa có đơn hàng nào đang xử lý</h3>
+                <h3>Chưa có đơn hàng nào đang giao</h3>
             <?php }
             ?>
         </div>
@@ -169,14 +169,14 @@ $completeOrderList = $order->getCompleteOrder();
                             <td><?= $value['createdDate'] ?></td>
                             <td><?= $value['status'] ?></td>
                             <td>
-                                <a href="orderdetail.html">Chi tiết</a>
+                                <a href="orderlistdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
                             </td>
                         </tr>
                     <?php }
                     ?>
                 </table>
             <?php } else { ?>
-                <h3>Chưa có đơn hàng nào đang xử lý</h3>
+                <h3>Chưa có đơn hàng nào đã hoàn thành</h3>
             <?php }
             ?>
         </div>
