@@ -2,9 +2,10 @@
 include 'classes/user.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = new user();
-    $result = $user->insert($_POST);
-    $userId = $user->getLastUserId();
-    header("Location:./confirm.php?id=".$userId['id']."");
+    $result = $user->confirm($_POST['userId'], $_POST['captcha']);
+    if ($result === true) {
+        echo '<script type="text/javascript">alert("Xác minh tài khoản thành công!"); window.location.href = "login.php";</script>';
+    }
 }
 ?>
 
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Đăng ký</title>
+    <title>Xác minh Email</title>
 </head>
 
 <body>
@@ -35,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <li><a href="login.php" id="signin">Đăng nhập</a></li>
             <li><a href="order.php" id="order">Đơn hàng</a></li>
             <li>
-                <a href="checkout.html">
+                <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        10
+                        0
                     </span>
                 </a>
             </li>
@@ -46,31 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </nav>
     <section class="banner"></section>
     <div class="featuredProducts">
-        <h1>Đăng ký</h1>
+        <h1>Xác minh Email</h1>
     </div>
     <div class="container-single">
         <div class="login">
             <?= !empty($result) ? $result : '' ?>
-            <form action="register.php" method="post" class="form-login">
-                <label for="fullName">Full name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Full name...">
-
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email...">
-
-                <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password">
-
-                <label for="repassword">Nhập lại mật khẩu</label>
-                <input type="password" id="repassword" name="repassword">
-
-                <label for="address">Địa chỉ</label>
-                <textarea name="address" id="address" cols="30" rows="5"></textarea>
-
-                <label for="dob">Ngày sinh</label>
-                <input type="date" name="dob" id="dob">
-
-                <input type="submit" value="Đăng ký" name="submit">
+            <form action="confirm.php" method="post" class="form-login">
+                <label for="fullName">Mã xác minh</label>
+                <input type="text" id="userId" name="userId" hidden style="display: none;" value="<?= $_GET['id'] ?>">
+                <input type="text" id="captcha" name="captcha" placeholder="Mã xác minh...">
+                <input type="submit" value="Xác minh" name="submit">
             </form>
         </div>
     </div>
