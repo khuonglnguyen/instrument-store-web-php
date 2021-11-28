@@ -6,7 +6,7 @@ $cart = new cart();
 $totalQty = $cart->getTotalQtyByUserId();
 
 $product = new product();
-$result=$product->getProductbyId($_GET['id']);
+$result = $product->getProductbyId($_GET['id']);
 if (!$result) {
     echo 'Không tìm thấy sản phẩm!';
     die();
@@ -43,7 +43,7 @@ if (!$result) {
                 <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                    <?= ($totalQty['total']) ? $totalQty['total'] : "0" ?>
+                        <?= ($totalQty['total']) ? $totalQty['total'] : "0" ?>
                     </span>
                 </a>
             </li>
@@ -65,10 +65,11 @@ if (!$result) {
                 Giá: <b><?= number_format($result['promotionPrice'], 0, '', ',') ?></b>
             </div>
             <div class="des">
-            <?= $result['des'] ?>
+                <p>Đã bán: <?= $result['soldCount'] ?></p>
+                <?= $result['des'] ?>
             </div>
             <div class="add-cart-single">
-                  <a href="add_cart.php?id=<?= $result['id'] ?>">Thêm vào giỏ</a>  
+                <a href="add_cart.php?id=<?= $result['id'] ?>">Thêm vào giỏ</a>
             </div>
         </div>
     </div>

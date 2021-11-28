@@ -26,7 +26,7 @@ class order
     {
         $userId = Session::get('userId');
         //Add new order
-        $sql_insert_cart = "INSERT INTO orders VALUES(NULL,'$userId','" . date('d/m/y') . "','Processing' )";
+        $sql_insert_cart = "INSERT INTO orders VALUES(NULL,'$userId','" . date('y/m/d') . "',NULL,'Processing' )";
         $insert_cart = $this->db->insert($sql_insert_cart);
         if (!$insert_cart) {
             return false;
@@ -66,6 +66,16 @@ class order
             return true;
         }
 
+        return false;
+    }
+
+    function updateReceivedDateOrder($id)
+    {
+        $query = "UPDATE orders SET receivedDate = '" . Date('y/m/d', strtotime('+3 days')) . "' WHERE id = $id";
+        $mysqli_result = $this->db->update($query);
+        if ($mysqli_result) {
+            return true;
+        }
         return false;
     }
 
@@ -135,13 +145,15 @@ class order
         }
         return false;
     }
-    
+
     public function processedOrder($id)
     {
         $query = "UPDATE orders SET status = 'Processed' WHERE id = $id";
         $mysqli_result = $this->db->update($query);
         if ($mysqli_result) {
-            return true;
+            if ($this->updateReceivedDateOrder($id)) {
+                return true;
+            }
         }
         return false;
     }
@@ -158,7 +170,7 @@ class order
 
     public function completeOrder($id)
     {
-        $query = "UPDATE orders SET status = 'Complete' WHERE id = $id";
+        $query = "UPDATE orders SET status = 'Complete', receivedDate = '" . date('y/m/d') . "' WHERE id = $id";
         $mysqli_result = $this->db->update($query);
         if ($mysqli_result) {
             return true;

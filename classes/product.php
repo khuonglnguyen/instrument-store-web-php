@@ -44,7 +44,7 @@ class product
         if ($name == '' || $originalPrice == "" || $promotionPrice == "" || $cateId == "" || $des == "" || $qty == "") {
         } else {
             move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('d/m/y') . "','$cateId','$qty','$des',1) ";
+            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('Y/m/d') . "','$cateId','$qty','$des',1) ";
             $result = $this->db->insert($query);
             if ($result) {
                 $alert = "<span class='success'>Sản phẩm đã được thêm thành công</span>";

@@ -67,7 +67,7 @@ $completeOrderList = $order->getCompleteOrder();
                             <td><?= $count++ ?></td>
                             <td><?= $value['id'] ?></td>
                             <td><?= $value['createdDate'] ?></td>
-                            <td><?= $value['createdDate'] ?></td>
+                            <td><?= ($value['status'] != "Processing") ? $value['receivedDate'] : "Dự kiến 3 ngày sau khi đơn hàng đã được xử lý" ?> <?=  ($value['status'] != "Complete" && $value['status'] != "Processing") ? "(Dự kiến)" : "" ?> </td>
                             <td><?= $value['status'] ?></td>
                             <td>
                                 <a href="orderlistdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
@@ -100,7 +100,7 @@ $completeOrderList = $order->getCompleteOrder();
                             <td><?= $count++ ?></td>
                             <td><?= $value['id'] ?></td>
                             <td><?= $value['createdDate'] ?></td>
-                            <td><?= $value['createdDate'] ?></td>
+                            <td><?= ($value['status'] != "Processing") ? $value['receivedDate'] : "Dự kiến 3 ngày sau khi đơn hàng đã được xử lý" ?> <?=  ($value['status'] != "Complete" && $value['status'] != "Processing") ? "(Dự kiến)" : "" ?> </td>
                             <td><?= $value['status'] ?></td>
                             <td>
                                 <a href="delivering_order.php?orderId=<?= $value['id'] ?>">Giao hàng</a>
@@ -133,7 +133,7 @@ $completeOrderList = $order->getCompleteOrder();
                             <td><?= $count++ ?></td>
                             <td><?= $value['id'] ?></td>
                             <td><?= $value['createdDate'] ?></td>
-                            <td><?= $value['createdDate'] ?></td>
+                            <td><?= ($value['status'] != "Processing") ? $value['receivedDate'] : "Dự kiến 3 ngày sau khi đơn hàng đã được xử lý" ?> <?=  ($value['status'] != "Complete" && $value['status'] != "Processing") ? "(Dự kiến)" : "" ?> </td>
                             <td><?= $value['status'] ?></td>
                             <td>
                                 <a href="orderlistdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>
@@ -166,7 +166,7 @@ $completeOrderList = $order->getCompleteOrder();
                             <td><?= $count++ ?></td>
                             <td><?= $value['id'] ?></td>
                             <td><?= $value['createdDate'] ?></td>
-                            <td><?= $value['createdDate'] ?></td>
+                            <td><?= ($value['status'] != "Processing") ? $value['receivedDate'] : "Dự kiến 3 ngày sau khi đơn hàng đã được xử lý" ?> <?=  ($value['status'] != "Complete" && $value['status'] != "Processing") ? "(Dự kiến)" : "" ?> </td>
                             <td><?= $value['status'] ?></td>
                             <td>
                                 <a href="orderlistdetail.php?orderId=<?= $value['id'] ?>">Chi tiết</a>

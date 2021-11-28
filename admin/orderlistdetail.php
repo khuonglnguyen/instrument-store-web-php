@@ -37,7 +37,7 @@ $order_result = $order->getById($result[0]['orderId']);
         </ul>
     </nav>
     <div class="title">
-        <h1>Chi tiết đơn đặt hàng DH0001</h1>
+        <h1>Chi tiết đơn đặt hàng <?= $order_result['id'] ?></h1>
     </div>
     <div class="container">
         <?php
