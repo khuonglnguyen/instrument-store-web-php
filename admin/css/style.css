@@ -32,6 +32,7 @@ body{
   border-left: 10px solid var(--blue);
   transition: 0.5s;
   overflow: hidden;
+
 }
 .navigation.active{
   width: 80px;
@@ -56,6 +57,8 @@ body{
 .navigation ul li:nth-child(1){
   margin-bottom: 30px;
   pointer-events: none;
+  text-transform: uppercase;
+  font-weight: 800px;
 }
 .navigation ul li a{
   position: relative;
@@ -136,23 +139,28 @@ body{
   justify-content: space-between;
   text-align: center;
   padding: 0 10px;
+  border-bottom: 1px solid #ccc;
 }
 .topbar-togle{
+  flex: 1;
   position: relative;
   color:var(--black2);
   top: 0;
   width: 60px;
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   font-size: 1.5rem;
   cursor: pointer;
 }
 .topbar-search{
+  flex: 8;
   position: relative;
   width: 400px;
   margin: 10px;
+  padding-left: 55%;
+  padding-right: 10px;
 }
 .topbar-search label{
   position: relative;
@@ -162,6 +170,7 @@ body{
   width: 100%;
   height: 40px;
   border-radius: 25px;
+  justify-content: left;
   padding: 10px 20px;
   padding-left: 35px;
   font-size: 16px;
@@ -176,11 +185,12 @@ body{
   font-size: 1.2em;
 }
 .topbar-user{
+  flex: 1;
   position: relative;
   margin: 10px;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+
   overflow: hidden;
   cursor: pointer;
 }
@@ -188,9 +198,12 @@ body{
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  
 }
 
 .cardBox{
@@ -232,5 +245,131 @@ body{
 .cardBox .card:hover .card-number,
 .cardBox .card:hover .cardName,
 .cardBox .card:hover .card-icon{
+  color: var(--white);
+}
+.details{
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 30px;
+  /* margin-top: 10px; */
+}
+.details .resentOrder{
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+  border-radius: 20px;
+}
+.cardHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cardHeader h2{
+  font-weight: 600;
+  color: var(--blue);
+}
+.btn{
+  position: relative;
+  padding: 5px 10px;
+  background: var(--blue);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 6px;
+}
+.details table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px; 
+}
+.details table thead td{
+  font-weight: 600;
+}
+.details .resentOrder table tr{
+  color: var(--black1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.details .resentOrder table tr:last-child{
+  border-bottom: none;
+}
+.details .resentOrder table tbody tr:hover{
+  background: var(--blue);
+  color: var(--white);
+}
+.details .resentOrder table tr td{
+  padding: 10px;
+}
+.details .resentOrder table tr td:last-child{
+  text-align: end;
+}
+.details .resentOrder table tr td:nth-child(2){
+  text-align: end;
+}
+.details .resentOrder table tr td:nth-child(3){
+  text-align: center;
+}
+/* status color */
+.status.delivered{
+  padding: 2px 4px;
+  background: #8de02c;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.status.pending{
+  padding: 2px 4px;
+  background: #e02c2c;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.resentCustomer{
+  position: relative;
+  display: grid;
+  min-height: 500px;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+  border-radius: 20px;
+}
+.resentCustomer .imgBox{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.resentCustomer .imgBox img{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.resentCustomer table tr td{
+  padding: 12px 10px;
+}
+.resentCustomer table tr td h4{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2rem;
+}
+.resentCustomer table tr td h4 span{
+  font-size: 14px;
+  color: var(--black2);
+}
+.resentCustomer table tr:hover{
+  background: var(--blue);
+  color: var(--white);
+}
+.resentCustomer table tr:hover td h4 span{
   color: var(--white);
 }

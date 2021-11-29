@@ -25,7 +25,7 @@ if ($role_id == 1) {
                 <li>
                     <a href="#">
                         <span class="nav-icon"><ion-icon name="musical-notes"></ion-icon></span>
-                        <span class="nav-title">The Band</span>
+                        <span class="nav-title">Instrument Store</span>
                     </a>
                 </li>
                 <li>
@@ -43,19 +43,19 @@ if ($role_id == 1) {
                 <li>
                     <a href="#">
                         <span class="nav-icon"><ion-icon name="information-circle"></ion-icon></span>
-                        <span class="nav-title">Help</span>
+                        <span class="nav-title">Hỏi đáp</span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="nav-icon"><ion-icon name="settings"></ion-icon></span>
-                        <span class="nav-title">Setting</span>
+                        <span class="nav-title">Cài đặt</span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="nav-icon"><ion-icon name="log-out"></ion-icon></span>
-                        <span class="nav-title">Log Out</span>
+                        <span class="nav-title">Đăng xuất</span>
                     </a>
                 </li>
             </ul>
@@ -108,6 +108,161 @@ if ($role_id == 1) {
                     <div class="card-icon"><ion-icon name="chatbox-outline"></ion-icon></div>
                 </div>
             </div>
+           
+            <div class="details">
+                 <!-- Order details list -->
+                <div class="resentOrder">
+                    <div class="cardHeader">
+                        <h2>Recent Order</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Tên</td>
+                                <td>Giá</td>
+                                <td>Đã mua</td>
+                                <td>Trạng thái</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delievered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delievered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delievered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status pending">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delievered</span></td>
+                            </tr>
+                            <tr>
+                                <td>HaiChau</td>
+                                <td>100k</td>
+                                <td>Paid</td>
+                                <td><span class="status delivered">Delievered</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- new customer -->
+                <div class="resentCustomer">
+                    <div class="cardHeader">
+                        <h2>Recent Customers</h2>
+                    </div>
+                    <table>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBox"><img src="./img/customers.jpg" witdh="100px" height="100px" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>HaiCute <br><span>Phú Quốc</span></h4>
+                            </td>
+                        </tr>
+                   
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -122,7 +277,6 @@ if ($role_id == 1) {
             navigation.classList.toggle('active');
             main.classList.toggle('active');
         }
-
         //add hovered class in selected list item
         let list = document.querySelectorAll('.navigation li');
         function activeLink(){
