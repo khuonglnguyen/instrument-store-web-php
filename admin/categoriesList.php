@@ -1,6 +1,6 @@
 <?php
 include '../lib/session.php';
-include '../classes/product.php';
+include '../classes/categories.php';
 Session::checkSessionAdmin();
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
@@ -10,20 +10,20 @@ if ($role_id == 1) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product = new product();
+    $categories = new categories();
     if (isset($_POST['block'])) {
-        $result = $product->block($_POST['id']);
+        $result = $categories->block($_POST['id']);
         if ($result) {
-            echo '<script type="text/javascript">alert("Khóa sản phẩm thành công!");</script>';
+            echo '<script type="text/javascript">alert("Khóa danh mục thành công!");</script>';
         } else {
-            echo '<script type="text/javascript">alert("Khóa sản phẩm thất bại!");</script>';
+            echo '<script type="text/javascript">alert("Khóa danh mục thất bại!");</script>';
         }
     } else if (isset($_POST['active'])) {
-        $result = $product->active($_POST['id']);
+        $result = $categories->active($_POST['id']);
         if ($result) {
-            echo '<script type="text/javascript">alert("Kích hoạt sản phẩm thành công!");</script>';
+            echo '<script type="text/javascript">alert("Kích hoạt danh mục thành công!");</script>';
         } else {
-            echo '<script type="text/javascript">alert("Kích hoạt sản phẩm thất bại!");</script>';
+            echo '<script type="text/javascript">alert("Kích hoạt danh mục thất bại!");</script>';
         }
     } else {
         echo '<script type="text/javascript">alert("Có lỗi xảy ra!");</script>';
@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$product = new product();
-$list = $product->getAllAdmin();
+$categories = new categories();
+$list = $categories->getAllAdmin();
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +48,7 @@ $list = $product->getAllAdmin();
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
     <title>Admin</title>
 </head>
+
 <body>
     <nav>
         <input type="checkbox" id="check">
@@ -56,16 +57,16 @@ $list = $product->getAllAdmin();
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.php" class="active">Quản lý Sản phẩm</a></li>
-            <li><a href="categoriesList.php">Quản lý Danh mục</a></li>
+            <li><a href="productlist.php" >Quản lý Sản phẩm</a></li>
+            <li><a href="categoriesList.php" class="active">Quản lý danh mục</a></li>
             <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
-        <h1>Danh sách sản phẩm</h1>
+        <h1>Danh sách danh mục</h1>
     </div>
-    <div class="addNew">
-        <a href="add_product.php">Thêm mới</a>
+    <div class="action">
+        <a href="add_category.php">Thêm mới</a>
     </div>
     <div class="container">
         <?php $count = 1;
@@ -73,15 +74,7 @@ $list = $product->getAllAdmin();
             <table class="list">
                 <tr>
                     <th>STT</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Loại sản phẩm</th>
-                    <th>Hình ảnh</th>
-                    <th>Giá gốc</th>
-                    <th>Giá khuyến mãi</th>
-                    <th>Ngày tạo</th>
-                    <th>Tạo bởi</th>
-                    <th>Số lượng</th>
-                    <th>Mô tả</th>
+                    <th>Tên danh mục</th>
                     <th>Trạng thái</th>
                     <th>Thao tác</th>
                 </tr>
@@ -89,25 +82,17 @@ $list = $product->getAllAdmin();
                     <tr>
                         <td><?= $count++ ?></td>
                         <td><?= $value['name'] ?></td>
-                        <td><?= $value['cateName'] ?></td>
-                        <td><img class="image-cart" src="uploads/<?= $value['image'] ?>" alt=""></td>
-                        <td><?= number_format($value['originalPrice'], 0, '', ',')?> vnd</td>
-                        <td><?= $value['promotionPrice']?> vnd</td>
-                        <td><?= $value['createdDate'] ?></td>
-                        <td><?= $value['fullName'] ?></td>
-                        <td><?= $value['qty'] ?></td>
-                        <td><?= $value['des'] ?></td>
                         <td><?= ($value['status']) ? "Active" : "Block" ?></td>
                         <td>
-                            <a href="edit_product.php?id=<?= $value['id'] ?>">Sửa</a>
+                            <a href="edit_category.php?id=<?= $value['id'] ?>">Sửa</a>
                             <?php
                             if ($value['status']) { ?>
-                                <form action="productlist.php" method="post">
+                                <form action="categoriesList.php" method="post">
                                     <input type="text" name="id" hidden value="<?= $value['id'] ?>" style="display: none;">
                                     <input type="submit" value="Khóa" name="block">
                                 </form>
                             <?php } else { ?>
-                                <form action="productlist.php" method="post">
+                                <form action="categoriesList.php" method="post">
                                     <input type="text" name="id" hidden value="<?= $value['id'] ?>" style="display: none;">
                                     <input type="submit" value="Mở" name="active">
                                 </form>

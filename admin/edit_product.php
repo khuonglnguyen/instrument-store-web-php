@@ -1,6 +1,7 @@
 <?php
 include '../lib/session.php';
 include '../classes/product.php';
+include '../classes/categories.php';
 Session::checkSessionAdmin();
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
@@ -8,10 +9,14 @@ if ($role_id == 1) {
     $productUpdate = mysqli_fetch_assoc($product->getProductbyIdAdmin($_GET['id']));
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         $result = $product->update($_POST, $_FILES);
+        $productUpdate = mysqli_fetch_assoc($product->getProductbyIdAdmin($_GET['id']));
     }
 } else {
     header("Location:../index.php");
 }
+
+$category = new categories();
+$categoriesList = $category->getAll();
 ?>
 
 
@@ -70,7 +75,13 @@ if ($role_id == 1) {
 
                 <label for="cateId">Loại sản phẩm</label>
                 <select id="cateId" name="cateId">
-                    <option value="2">Piano</option>
+                    <?php foreach ($categoriesList as $key => $value) {
+                        if ($value['id'] == $productUpdate['cateId']) { ?>
+                            <option selected value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php  } else { ?>
+                            <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                        <?php   } ?>
+                    <?php } ?>
                 </select>
 
                 <label for="qty">Số lượng</label>

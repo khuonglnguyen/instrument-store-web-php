@@ -1,20 +1,16 @@
 <?php
 include '../lib/session.php';
-include '../classes/product.php';
 include '../classes/categories.php';
 Session::checkSessionAdmin();
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $product = new product();
-        $result = $product->insert($_POST, $_FILES);
+        $category = new categories();
+        $result = $category->insert($_POST['name']);
     }
 } else {
     header("Location:../index.php");
 }
-
-$category = new categories();
-$categoriesList = $category->getAll();
 ?>
 
 
@@ -41,42 +37,19 @@ $categoriesList = $category->getAll();
         <label class="logo">ADMIN</label>
         <ul>
             <li><a href="productlist.php">Quản lý Sản phẩm</a></li>
+            <li><a href="categoriesList.php" class="active">Quản lý danh mục</a></li>
             <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
-        <h1>Thêm mới sản phẩm</h1>
+        <h1>Thêm mới danh mục</h1>
     </div>
     <div class="container">
         <p style="color: green;"><?= !empty($result) ? $result : '' ?></p>
         <div class="form-add">
-            <form action="add_product.php" method="post" enctype="multipart/form-data">
-                <label for="name">Tên sản phẩm</label>
-                <input type="text" id="name" name="name" placeholder="Tên sản phẩm..">
-
-                <label for="originalPrice">Giá gốc</label>
-                <input type="number" id="originalPrice" name="originalPrice" placeholder="Giá..">
-
-                <label for="promotionPrice">Giá khuyến mãi</label>
-                <input type="number" id="promotionPrice" name="promotionPrice" placeholder="Giá..">
-
-                <label for="image">Hình ảnh</label>
-                <input type="file" id="image" name="image">
-
-                <label for="cateId">Loại sản phẩm</label>
-                <select id="cateId" name="cateId">
-                    <?php
-                    foreach ($categoriesList as $key => $value) { ?>
-                        <option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
-                    <?php }
-                    ?>
-                </select>
-
-                <label for="qty">Số lượng</label>
-                <input type="number" id="qty" name="qty">
-
-                <label for="des">Mô tả</label>
-                <textarea name="des" id="des" cols="30" rows="10"></textarea>
+            <form action="add_category.php" method="post">
+                <label for="name">Tên danh mục</label>
+                <input type="text" id="name" name="name" placeholder="Tên danh mục..">
 
                 <input type="submit" value="Lưu" name="submit">
             </form>
