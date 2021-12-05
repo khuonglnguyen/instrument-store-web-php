@@ -43,7 +43,7 @@ class user
 			$query = "SELECT * FROM users WHERE email = '$email' AND password = '$password' LIMIT 1 ";
 			$result = $this->db->select($query);
 
-			if ($result != false) {
+			if ($result) {
 				$value = $result->fetch_assoc();
 				Session::set('user', true); // set user is true
 				Session::set('userId', $value['id']);

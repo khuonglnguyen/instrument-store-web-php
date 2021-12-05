@@ -72,7 +72,7 @@ $userInfo = $user->get();
                         <td><?= $count++ ?></td>
                         <td><?= $value['productName'] ?></td>
                         <td><img class="image-cart" src="admin/uploads/<?= $value['productImage'] ?>"></td>
-                        <td><?= number_format($value['productPrice'], 0, '', ',') ?></td>
+                        <td><?= number_format($value['productPrice'], 0, '', ',') ?>VND </td>
                         <td>
                             <input id="<?= $value['productId'] ?>" type="number" name="qty" class="qty" value="<?= $value['qty'] ?>" onchange="update(this)" min="1">
                         </td>

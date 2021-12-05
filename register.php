@@ -3,7 +3,7 @@ include 'classes/user.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = new user();
     $result = $user->insert($_POST);
-    $userId = $user->getLastUserId();
+    $userId = $user->getLastUserId(); 
     header("Location:./confirm.php?id=".$userId['id']."");
 }
 ?>
