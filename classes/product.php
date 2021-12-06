@@ -2,7 +2,6 @@
 
 $filepath = realpath(dirname(__FILE__));
 include_once($filepath . '/../lib/database.php');
-include_once($filepath . '/../helpers/format.php');
 include_once($filepath . '/../lib/session.php');
 ?>
 
@@ -13,27 +12,22 @@ include_once($filepath . '/../lib/session.php');
 class product
 {
     private $db;
-    private $fm;
     public function __construct()
     {
         $this->db = new Database();
-        $this->fm = new Format();
     }
 
-    public function insert($data, $files)
+    public function insert($data)
     {
-        $name = mysqli_real_escape_string($this->db->link, $data['name']);
-        $originalPrice = mysqli_real_escape_string($this->db->link, $data['originalPrice']);
-        $promotionPrice = mysqli_real_escape_string($this->db->link, $data['promotionPrice']);
-        $cateId = mysqli_real_escape_string($this->db->link, $data['cateId']);
-        $des = mysqli_real_escape_string($this->db->link, $data['des']);
-        $qty = mysqli_real_escape_string($this->db->link, intval($data['qty']));
-        //mysqli gọi 2 biến. (catName and link) biến link -> gọi conect db từ file db
+        $name = $data['name'];
+        $originalPrice = $data['originalPrice'];
+        $promotionPrice = $data['promotionPrice'];
+        $cateId = $data['cateId'];
+        $des = $data['des'];
+        $qty = $data['qty'];
 
         // Check image and move to upload folder
-        $permited = array('jpg', 'jpeg', 'png', 'gif');
         $file_name = $_FILES['image']['name'];
-        $file_size = $_FILES['image']['size'];
         $file_temp = $_FILES['image']['tmp_name'];
 
         $div = explode('.', $file_name);
@@ -42,6 +36,8 @@ class product
         $uploaded_image = "uploads/" . $unique_image;
 
         if ($name == '' || $originalPrice == "" || $promotionPrice == "" || $cateId == "" || $des == "" || $qty == "") {
+            $alert = "<span class='error'>Vui lòng nhập đầy đủ thông tin sản phẩm</span>";
+            return $alert;
         } else {
             move_uploaded_file($file_temp, $uploaded_image);
             $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('Y/m/d') . "','$cateId','$qty','$des',1) ";
@@ -69,7 +65,7 @@ class product
     public function getAll()
     {
         $query =
-            "SELECT products.*, categories.name as cateName, users.fullName
+            "SELECT products.*, categories.name as cateName
 			 FROM products INNER JOIN categories ON products.cateId = categories.id INNER JOIN users ON products.createdBy = users.id
 			 WHERE products.status = 1
              order by products.id desc ";
@@ -77,24 +73,32 @@ class product
         return $result;
     }
 
+    public function getFeaturedProducts()
+    {
+        $query =
+            "SELECT *
+			 FROM products
+			 WHERE products.status = 1
+             order by products.soldCount DESC
+             LIMIT 8";
+        $result = $this->db->select($query);
+        return $result;
+    }
+
     public function update($data, $files)
     {
-        $name = mysqli_real_escape_string($this->db->link, $data['name']);
-        $originalPrice = mysqli_real_escape_string($this->db->link, $data['originalPrice']);
-        $promotionPrice = mysqli_real_escape_string($this->db->link, $data['promotionPrice']);
-        $cateId = mysqli_real_escape_string($this->db->link, $data['cateId']);
-        $des = mysqli_real_escape_string($this->db->link, $data['des']);
-        $qty = mysqli_real_escape_string($this->db->link, intval($data['qty']));
-
-        $permited  = array('jpg', 'jpeg', 'png', 'gif');
+        $name = $data['name'];
+        $originalPrice = $data['originalPrice'];
+        $promotionPrice = $data['promotionPrice'];
+        $cateId = $data['cateId'];
+        $des = $data['des'];
+        $qty = $data['qty'];
 
         $file_name = $_FILES['image']['name'];
-        $file_size = $_FILES['image']['size'];
         $file_temp = $_FILES['image']['tmp_name'];
 
         $div = explode('.', $file_name);
         $file_ext = strtolower(end($div));
-        // $file_current = strtolower(current($div));
         $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
         $uploaded_image = "uploads/" . $unique_image;
 
@@ -106,10 +110,6 @@ class product
 
             //If user has chooose new image
             if (!empty($file_name)) {
-                if (in_array($file_ext, $permited) === false) {
-                    $alert = "<span class='success'>Vui lòng chọn hình ảnh đúng định dạng:-" . implode(', ', $permited) . "</span>";
-                    return $alert;
-                }
                 move_uploaded_file($file_temp, $uploaded_image);
                 $query = "UPDATE products SET 
 					name ='$name',

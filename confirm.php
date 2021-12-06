@@ -51,10 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="container-single">
         <div class="login">
-            <?= !empty($result) ? $result : '' ?>
+            <b class="error"><?= !empty($result) ? $result : '' ?></b>
             <form action="confirm.php" method="post" class="form-login">
                 <label for="fullName">Mã xác minh</label>
-                <input type="text" id="userId" name="userId" hidden style="display: none;" value="<?= $_GET['id'] ?>">
+                <input type="text" id="userId" name="userId" hidden style="display: none;" value="<?= (isset($_GET['id'])) ? $_GET['id'] : $_POST['userId'] ?>">
                 <input type="text" id="captcha" name="captcha" placeholder="Mã xác minh...">
                 <input type="submit" value="Xác minh" name="submit">
             </form>

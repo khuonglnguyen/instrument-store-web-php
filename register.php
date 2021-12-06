@@ -52,23 +52,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="login">
             <?= !empty($result) ? $result : '' ?>
             <form action="register.php" method="post" class="form-login">
-                <label for="fullName">Full name</label>
-                <input type="text" id="fullName" name="fullName" placeholder="Full name...">
+                <label for="fullName">Họ tên</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Họ tên..." required>
 
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email...">
+                <input type="email" id="email" name="email" placeholder="Email..." required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
 
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" placeholder="Mật khẩu..." required>
 
                 <label for="repassword">Nhập lại mật khẩu</label>
-                <input type="password" id="repassword" name="repassword">
+                <input type="password" id="repassword" name="repassword" required placeholder="Nhập lại mật khẩu..." oninput="check(this)">
 
                 <label for="address">Địa chỉ</label>
-                <textarea name="address" id="address" cols="30" rows="5"></textarea>
+                <textarea name="address" id="address" cols="30" rows="5" required></textarea>
 
                 <label for="dob">Ngày sinh</label>
-                <input type="date" name="dob" id="dob">
+                <input type="date" name="dob" id="dob" required>
 
                 <input type="submit" value="Đăng ký" name="submit">
             </form>
@@ -98,5 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="copyright">Khuong Nguyen @ 2021</p>
     </footer>
 </body>
-
+<script language='javascript' type='text/javascript'>
+    function check(input) {
+        if (input.value != document.getElementById('password').value) {
+            input.setCustomValidity('Password Must be Matching.');
+        }
+    }
+</script>
 </html>

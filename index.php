@@ -7,7 +7,7 @@ $cart = new cart();
 $totalQty = $cart->getTotalQtyByUserId();
 
 $product = new product();
-$list = mysqli_fetch_all($product->getAll(), MYSQLI_ASSOC);
+$list = mysqli_fetch_all($product->getFeaturedProducts(), MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -68,10 +68,13 @@ $list = mysqli_fetch_all($product->getAll(), MYSQLI_ASSOC);
                             <h3><?= $value['name'] ?></h3>
                         </a>
                     </div>
-                    <div class="price">
-                        <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
+                    <div>
+                        Đã bán: <?= $value['soldCount'] ?>
                     </div>
-                    <div class="rating">
+                    <div class="price">
+                        Giá: <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
+                    </div>
+                    <!-- <div class="rating">
                         <div class="rating">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
@@ -79,7 +82,7 @@ $list = mysqli_fetch_all($product->getAll(), MYSQLI_ASSOC);
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="action">
                         <a class="add-cart" href="add_cart.php?id=<?= $value['id'] ?>">Thêm vào giỏ</a>
                         <a class="detail" href="detail.php?id=<?= $value['id'] ?>">Xem chi tiết</a>

@@ -24,7 +24,7 @@ if (!$result) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Single</title>
+    <title><?= $result['name'] ?></title>
 </head>
 
 <body>
@@ -62,7 +62,7 @@ if (!$result) {
                 <h2><?= $result['name'] ?></h2>
             </div>
             <div class="price-single">
-                Giá: <b><?= number_format($result['promotionPrice'], 0, '', ',') ?></b>
+                Giá: <b><?= number_format($result['promotionPrice'], 0, '', ',') ?>VND</b>
             </div>
             <div class="des">
                 <p>Đã bán: <?= $result['soldCount'] ?></p>

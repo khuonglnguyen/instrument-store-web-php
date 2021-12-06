@@ -2,7 +2,6 @@
 $filepath = realpath(dirname(__FILE__));
 include_once($filepath . '/../lib/session.php');
 include_once($filepath . '/../lib/database.php');
-include_once($filepath . '/../helpers/format.php');
 include_once($filepath . '/../lib/Exception.php');
 include_once($filepath . '/../lib/PHPMailer.php');
 include_once($filepath . '/../lib/SMTP.php');
@@ -21,34 +20,23 @@ use PHPMailer\PHPMailer\Exception;
 class user
 {
 	private $db;
-	private $fm;
 	public function __construct()
 	{
 		$this->db = new Database();
-		$this->fm = new Format();
 	}
 
 	public function login($email, $password)
 	{
-		$email = $this->fm->validation($email); //call fucntion validation from file Format to check
-		$password = $this->fm->validation($password);
-
-		$email = mysqli_real_escape_string($this->db->link, $email);
-		$password = mysqli_real_escape_string($this->db->link, $password); //mysqli call 2 variable. (email and link) biến link -> gọi conect db từ file db
-
 		if (empty($email) || empty($password)) {
 			$alert = "Email và password không được để trống!";
 			return $alert;
 		} else {
 			$query = "SELECT * FROM users WHERE email = '$email' AND password = '$password' LIMIT 1 ";
 			$result = $this->db->select($query);
-
 			if ($result) {
 				$value = $result->fetch_assoc();
-				Session::set('user', true); // set user is true
+				Session::set('user', true);
 				Session::set('userId', $value['id']);
-				Session::set('email', $value['email']);
-				Session::set('fullName', $value['fullName']);
 				Session::set('role_id', $value['role_id']);
 				header("Location:index.php");
 			} else {
@@ -60,11 +48,11 @@ class user
 
 	public function insert($data)
 	{
-		$fullName = mysqli_real_escape_string($this->db->link, $data['fullName']);
-		$email = mysqli_real_escape_string($this->db->link, $data['email']);
-		$dob = mysqli_real_escape_string($this->db->link, $data['dob']);
-		$address = mysqli_real_escape_string($this->db->link, $data['address']);
-		$password = mysqli_real_escape_string($this->db->link, md5($data['password']));
+		$fullName = $data['fullName'];
+		$email = $data['email'];
+		$dob = $data['dob'];
+		$address = $data['address'];
+		$password = md5($data['password']);
 
 		if ($fullName == "" || $email == "" || $dob == "" || $email == "" || $password == "") {
 			$alert = '<span class="error">Vui lòng nhập vào đầy đủ thông tin tài khoản</span>';
@@ -97,10 +85,8 @@ class user
 
 					$mail->IsHTML(true);
 					$mail->CharSet = 'UTF-8';
-					$mail->AddAddress("lapankhuongnguyen@gmail.com", "recipient-name");
+					$mail->AddAddress($email, "recipient-name");
 					$mail->SetFrom("khuongip564gb@gmail.com", "Instrument Store");
-					$mail->AddReplyTo("khuongip564gb@gmail.com", "Instrument Store");
-					$mail->AddCC("khuongip564gb@gmail.com", "cc-recipient-name");
 					$mail->Subject = "Xác nhận email tài khoản - Instruments Store";
 					$mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website InstrumentStore</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
 

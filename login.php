@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Single</title>
+    <title>Đăng nhập</title>
 </head>
 
 <body>
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        10
+                        0
                     </span>
                 </a>
             </li>
@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="login">
             <form action="login.php" method="post" class="form-login">
                 <label for="username">Tên đăng nhập</label>
-                <input type="text" id="username" name="username" placeholder="Tên đăng nhập...">
+                <input type="text" id="username" name="username" placeholder="Tên đăng nhập..." required>
 
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" placeholder="Mật khẩu..." required>
                 <p style="color: red;"><?= !empty($login_check) ? $login_check : '' ?></p>
 
                 <input type="submit" value="Đăng nhập">
