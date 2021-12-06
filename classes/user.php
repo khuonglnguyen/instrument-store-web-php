@@ -1,9 +1,9 @@
 <?php
-include_once('../lib/session.php');
-include_once('../lib/database.php');
-include_once('../lib/Exception.php');
-include_once('../lib/PHPMailer.php');
-include_once('../lib/SMTP.php');
+$filepath = realpath(dirname(__FILE__));
+include_once($filepath . '/../lib/session.php');
+include_once($filepath . '/../lib/database.php');
+include_once($filepath . '/../lib/PHPMailer.php');
+include_once($filepath . '/../lib/SMTP.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 ?>
@@ -49,48 +49,44 @@ class user
 		$address = $data['address'];
 		$password = md5($data['password']);
 
-		if ($fullName == "" || $email == "" || $dob == "" || $email == "" || $password == "") {
-			$alert = '<span class="error">Vui lòng nhập vào đầy đủ thông tin tài khoản</span>';
+
+		$check_email = "SELECT * FROM users WHERE email='$email' LIMIT 1";
+		$result_check = $this->db->select($check_email);
+		if ($result_check) {
+			$alert = '<span class="error">Email đã tồn tại</span>';
 			return $alert;
 		} else {
-			$check_email = "SELECT * FROM users WHERE email='$email' LIMIT 1";
-			$result_check = $this->db->select($check_email);
-			if ($result_check) {
-				$alert = '<span class="error">Email đã tồn tại</span>';
-				return $alert;
+			// Genarate captcha
+			$captcha = rand(10000, 99999);
+
+			$query = "INSERT INTO users VALUES (NULL,'$email','$fullName','$dob','$password',2,1,'$address',0,'" . $captcha . "') ";
+			$result = $this->db->insert($query);
+			if ($result) {
+				// Send email
+				$mail = new PHPMailer();
+				$mail->IsSMTP();
+				$mail->Mailer = "smtp";
+
+				$mail->SMTPDebug  = 0;
+				$mail->SMTPAuth   = TRUE;
+				$mail->SMTPSecure = "tls";
+				$mail->Port       = 587;
+				$mail->Host       = "smtp.gmail.com";
+				$mail->Username   = "khuongip564gb@gmail.com";
+				$mail->Password   = "googlekhuongip564gb";
+
+				$mail->IsHTML(true);
+				$mail->CharSet = 'UTF-8';
+				$mail->AddAddress($email, "recipient-name");
+				$mail->SetFrom("khuongip564gb@gmail.com", "Instrument Store");
+				$mail->Subject = "Xác nhận email tài khoản - Instruments Store";
+				$mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website InstrumentStore</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
+
+				$mail->Send();
+
+				return '<span class="success">Đăng ký tài khoản thành công!</span>';
 			} else {
-				// Genarate captcha
-				$captcha = rand(10000, 99999);
-
-				$query = "INSERT INTO users VALUES (NULL,'$email','$fullName','$dob','$password',2,1,'$address',0,'" . $captcha . "') ";
-				$result = $this->db->insert($query);
-				if ($result) {
-					// Send email
-					$mail = new PHPMailer();
-					$mail->IsSMTP();
-					$mail->Mailer = "smtp";
-
-					$mail->SMTPDebug  = 0;
-					$mail->SMTPAuth   = TRUE;
-					$mail->SMTPSecure = "tls";
-					$mail->Port       = 587;
-					$mail->Host       = "smtp.gmail.com";
-					$mail->Username   = "khuongip564gb@gmail.com";
-					$mail->Password   = "googlekhuongip564gb";
-
-					$mail->IsHTML(true);
-					$mail->CharSet = 'UTF-8';
-					$mail->AddAddress($email, "recipient-name");
-					$mail->SetFrom("khuongip564gb@gmail.com", "Instrument Store");
-					$mail->Subject = "Xác nhận email tài khoản - Instruments Store";
-					$mail->Body = "<h3>Cảm ơn bạn đã đăng ký tài khoản tại website InstrumentStore</h3></br>Đây là mã xác minh tài khoản của bạn: " . $captcha . "";
-
-					$mail->Send();
-
-					return '<span class="success">Đăng ký tài khoản thành công!</span>';
-				} else {
-					return '<span class="error">Đăng ký tài khoản thất bại!</span>';
-				}
+				return '<span class="error">Đăng ký tài khoản thất bại!</span>';
 			}
 		}
 	}
