@@ -1,6 +1,12 @@
 <?php
 include_once '../lib/session.php';
-Session::checkSession();
+Session::checkSession('admin');
+$role_id = Session::get('role_id');
+if ($role_id == 1) {
+    # code...
+} else {
+    header("Location:../index.php");
+}
 include '../classes/order.php';
 
 $order = new order();

@@ -1,6 +1,6 @@
 <?php
 include '../lib/session.php';
-Session::checkSessionAdmin();
+Session::checkSession('admin');
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
     # code...

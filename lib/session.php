@@ -36,22 +36,15 @@ class Session
       }
    }
 
-   public static function checkSession()
+   public static function checkSession($type)
    {
       self::init();
       if (self::get("user") == false) {
          self::destroy();
+         if ($type == 'admin') {
+            header("Location:../login.php");
+         }
          header("Location:login.php");
-         die();
-      }
-   }
-
-   public static function checkSessionAdmin()
-   {
-      self::init();
-      if (self::get("user") == false) {
-         self::destroy();
-         header("Location:../login.php");
       }
    }
    //check session
