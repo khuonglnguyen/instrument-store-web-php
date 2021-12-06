@@ -53,8 +53,7 @@ class user
 		$check_email = "SELECT * FROM users WHERE email='$email' LIMIT 1";
 		$result_check = $this->db->select($check_email);
 		if ($result_check) {
-			$alert = '<span class="error">Email đã tồn tại</span>';
-			return $alert;
+			return 'Email đã tồn tại!';
 		} else {
 			// Genarate captcha
 			$captcha = rand(10000, 99999);
@@ -84,9 +83,9 @@ class user
 
 				$mail->Send();
 
-				return '<span class="success">Đăng ký tài khoản thành công!</span>';
+				return true;
 			} else {
-				return '<span class="error">Đăng ký tài khoản thất bại!</span>';
+				return false;
 			}
 		}
 	}

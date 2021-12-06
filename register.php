@@ -3,8 +3,10 @@ include 'classes/user.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = new user();
     $result = $user->insert($_POST);
-    $userId = $user->getLastUserId(); 
-    header("Location:./confirm.php?id=".$userId['id']."");
+    if ($result && $result != 'Email đã tồn tại!') {
+        $userId = $user->getLastUserId(); 
+        header("Location:./confirm.php?id=".$userId['id']."");
+    }
 }
 ?>
 
@@ -50,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="container-single">
         <div class="login">
-            <?= !empty($result) ? $result : '' ?>
             <form action="register.php" method="post" class="form-login">
                 <label for="fullName">Họ tên</label>
                 <input type="text" id="fullName" name="fullName" placeholder="Họ tên..." required>
 
                 <label for="email">Email</label>
+                <p class="error"><?= !empty($result) ? $result : '' ?></p>
                 <input type="email" id="email" name="email" placeholder="Email..." required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
 
                 <label for="password">Mật khẩu</label>
@@ -102,6 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     function check(input) {
         if (input.value != document.getElementById('password').value) {
             input.setCustomValidity('Password Must be Matching.');
+        }else{
+            input.setCustomValidity('');
         }
     }
 </script>
