@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="checkout.html">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                        10
+                        0
                     </span>
                 </a>
             </li>

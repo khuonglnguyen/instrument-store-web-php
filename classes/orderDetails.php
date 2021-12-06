@@ -1,8 +1,7 @@
 <?php
-$filepath = realpath(dirname(__FILE__));
-include_once($filepath . '/../lib/database.php');
-include_once($filepath . '/../lib/session.php');
-include_once($filepath . '/../classes/cart.php');
+include_once('../lib/database.php');
+include_once('../lib/session.php');
+include_once('../classes/cart.php');
 ?>
 
 

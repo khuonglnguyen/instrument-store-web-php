@@ -1,17 +1,12 @@
 <?php
-$filepath = realpath(dirname(__FILE__));
-include_once($filepath . '/../lib/session.php');
-include_once($filepath . '/../lib/database.php');
-include_once($filepath . '/../lib/Exception.php');
-include_once($filepath . '/../lib/PHPMailer.php');
-include_once($filepath . '/../lib/SMTP.php');
+include_once('../lib/session.php');
+include_once('../lib/database.php');
+include_once('../lib/Exception.php');
+include_once('../lib/PHPMailer.php');
+include_once('../lib/SMTP.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 ?>
-
-
 
 <?php
 /**

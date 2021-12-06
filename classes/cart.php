@@ -1,8 +1,7 @@
 <?php
-$filepath = realpath(dirname(__FILE__));
-include_once($filepath . '/../lib/database.php');
-include_once($filepath . '/../lib/session.php');
-include_once($filepath . '/../classes/product.php');
+include_once('../lib/database.php');
+include_once('../lib/session.php');
+include_once('../classes/product.php');
 ?>
 
 
@@ -20,7 +19,6 @@ class cart
     }
     public function add($productId)
     {
-        $productId = mysqli_real_escape_string($this->db->link, $productId);
         $userId = Session::get('userId');
 
         $query = "SELECT * FROM products WHERE id = '$productId' ";
