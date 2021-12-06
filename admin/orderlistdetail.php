@@ -39,7 +39,7 @@ $order_result = $order->getById($result[0]['orderId']);
         <label class="logo">ADMIN</label>
         <ul>
             <li><a href="productlist.php">Quản lý Sản phẩm</a></li>
-            <li><a href="orderlist.php" id="order" class="active">Quản lý Đơn hàng</a></li>
+            <li><a href="orderlist.php" class="active">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">

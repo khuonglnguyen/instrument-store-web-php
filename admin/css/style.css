@@ -70,7 +70,8 @@ a:hover{
 }
 
 .container{
-    height: auto;
+  margin-top: 30px;
+  height: auto;
 }
 
 .title{

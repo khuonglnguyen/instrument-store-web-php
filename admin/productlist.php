@@ -58,7 +58,7 @@ $list = $product->getAllAdmin();
         <ul>
             <li><a href="productlist.php" class="active">Quản lý Sản phẩm</a></li>
             <li><a href="categoriesList.php">Quản lý Danh mục</a></li>
-            <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
+            <li><a href="orderlist.php">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
@@ -74,14 +74,11 @@ $list = $product->getAllAdmin();
                 <tr>
                     <th>STT</th>
                     <th>Tên sản phẩm</th>
-                    <th>Loại sản phẩm</th>
                     <th>Hình ảnh</th>
                     <th>Giá gốc</th>
                     <th>Giá khuyến mãi</th>
-                    <th>Ngày tạo</th>
                     <th>Tạo bởi</th>
                     <th>Số lượng</th>
-                    <th>Mô tả</th>
                     <th>Trạng thái</th>
                     <th>Thao tác</th>
                 </tr>
@@ -89,17 +86,14 @@ $list = $product->getAllAdmin();
                     <tr>
                         <td><?= $count++ ?></td>
                         <td><?= $value['name'] ?></td>
-                        <td><?= $value['cateName'] ?></td>
                         <td><img class="image-cart" src="uploads/<?= $value['image'] ?>" alt=""></td>
-                        <td><?= number_format($value['originalPrice'], 0, '', ',')?> vnd</td>
-                        <td><?= $value['promotionPrice']?> vnd</td>
-                        <td><?= $value['createdDate'] ?></td>
+                        <td><?= number_format($value['originalPrice'], 0, '', ',')?> VND</td>
+                        <td><?= number_format($value['promotionPrice'], 0, '', ',')?> VND</td>
                         <td><?= $value['fullName'] ?></td>
                         <td><?= $value['qty'] ?></td>
-                        <td><?= $value['des'] ?></td>
                         <td><?= ($value['status']) ? "Active" : "Block" ?></td>
                         <td>
-                            <a href="edit_product.php?id=<?= $value['id'] ?>">Sửa</a>
+                            <a href="edit_product.php?id=<?= $value['id'] ?>">Xem/Sửa</a>
                             <?php
                             if ($value['status']) { ?>
                                 <form action="productlist.php" method="post">
