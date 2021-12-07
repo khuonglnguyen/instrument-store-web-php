@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $categories = new categories();
-$list = $categories->getAllAdmin($_GET['page']);
+$list = $categories->getAllAdmin((isset($_GET['page']) ? $_GET['page'] : 1));
 $pageCount = $categories->getCountPaging();
 ?>
 
@@ -58,9 +58,9 @@ $pageCount = $categories->getCountPaging();
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.php?page=1" >Quản lý Sản phẩm</a></li>
-            <li><a href="categoriesList.php?page=1" class="active">Quản lý danh mục</a></li>
-            <li><a href="orderlist.php?page=1" id="order">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php" >Quản lý Sản phẩm</a></li>
+            <li><a href="categoriesList.php" class="active">Quản lý danh mục</a></li>
+            <li><a href="orderlist.php" id="order">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
@@ -106,17 +106,21 @@ $pageCount = $categories->getCountPaging();
             <h3>Chưa có danh mục nào...</h3>
         <?php } ?>
         <div class="pagination">
-            <a href="categoriesList.php?page=<?= ($_GET['page'] <= 1 ) ? 1 : $_GET['page'] - 1 ?>">&laquo;</a>
+            <a href="categoriesList.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>">&laquo;</a>
             <?php
             for ($i = 1; $i <= $pageCount; $i++) {
-                if ($i == $_GET['page']) { ?>
-                    <a class="active" href="categoriesList.php?page=<?= $i ?>"><?= $i ?></a>
-                <?php } else { ?>
+                if (isset($_GET['page'])) {
+                    if ($i == $_GET['page']) { ?>
+                        <a class="active" href="categoriesList.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php } else { ?>
+                        <a href="categoriesList.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php  }
+                } else { ?>
                     <a href="categoriesList.php?page=<?= $i ?>"><?= $i ?></a>
                 <?php  } ?>
             <?php }
             ?>
-            <a href="categoriesList.php?page=<?= $_GET['page'] + 1 ?>">&raquo;</a>
+            <a href="categoriesList.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>">&raquo;</a>
         </div>
     </div>
     </div>

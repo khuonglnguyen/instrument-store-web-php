@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $product = new product();
-$list = $product->getAllAdmin($_GET['page']);
+$list = $product->getAllAdmin((isset($_GET['page']) ? $_GET['page'] : 1));
 $pageCount = $product->getCountPaging();
 ?>
 
@@ -58,9 +58,9 @@ $pageCount = $product->getCountPaging();
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.php?page=1" class="active">Quản lý Sản phẩm</a></li>
-            <li><a href="categoriesList.php?page=1">Quản lý Danh mục</a></li>
-            <li><a href="orderlist.php?page=1">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php" class="active">Quản lý Sản phẩm</a></li>
+            <li><a href="categoriesList.php">Quản lý Danh mục</a></li>
+            <li><a href="orderlist.php">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
@@ -116,17 +116,25 @@ $pageCount = $product->getCountPaging();
             <h3>Chưa có sản phẩm nào...</h3>
         <?php } ?>
         <div class="pagination">
-            <a href="productlist.php?page=<?= ($_GET['page'] <= 1 ) ? 1 : $_GET['page'] - 1 ?>">&laquo;</a>
+            <a href="productlist.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>">&laquo;</a>
             <?php
             for ($i = 1; $i <= $pageCount; $i++) {
-                if ($i == $_GET['page']) { ?>
-                    <a class="active" href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
-                <?php } else { ?>
-                    <a href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                if (isset($_GET['page'])) {
+                    if ($i == $_GET['page']) { ?>
+                        <a class="active" href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php } else { ?>
+                        <a href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php  }
+                } else {
+                    if ($i == 1) { ?>
+                        <a class="active" href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php  } else { ?>
+                        <a href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php   } ?>
                 <?php  } ?>
             <?php }
             ?>
-            <a href="productlist.php?page=<?= $_GET['page'] + 1 ?>">&raquo;</a>
+            <a href="productlist.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>">&raquo;</a>
         </div>
     </div>
     </div>
