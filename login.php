@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="productList.php?page=1&cateId=2">Sản phẩm</a></li>
             <li><a href="register.php" id="signup">Đăng ký</a></li>
             <li><a href="login.php" id="signin" class="active">Đăng nhập</a></li>
             <li><a href="order.php" id="order">Đơn hàng</a></li>

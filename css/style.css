@@ -451,3 +451,8 @@ input[type=number]{
   font-size: 18px;
   width: 100px;
 }
+
+.category{
+  margin-left: 100px;
+  width: 200px;
+}

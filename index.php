@@ -33,6 +33,7 @@ $list = mysqli_fetch_all($product->getFeaturedProducts(), MYSQLI_ASSOC);
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.php" class="active">Trang chủ</a></li>
+            <li><a href="productList.php?page=1&cateId=2">Sản phẩm</a></li>
             <?php
             if (isset($_SESSION['user']) && $_SESSION['user']) { ?>
                 <li><a href="logout.php" id="signin">Đăng xuất</a></li>
@@ -53,7 +54,7 @@ $list = mysqli_fetch_all($product->getFeaturedProducts(), MYSQLI_ASSOC);
     </nav>
     <section class="banner"></section>
     <div class="featuredProducts">
-        <h1>Sảm phẩm nổi bật</h1>
+        <h1>Sản phẩm nổi bật</h1>
     </div>
     <div class="container">
         <?php

@@ -1,6 +1,6 @@
 <?php
 include_once 'lib/session.php';
-Session::checkSessionAdmin();
+Session::checkSession('client');
 include_once 'classes/order.php';
 
 if (isset($_GET['orderId'])) {

@@ -1,6 +1,6 @@
 <?php
 include_once 'lib/session.php';
-Session::checkSession();
+Session::checkSession('client');
 include_once 'classes/cart.php';
 
 $cart = new cart();
