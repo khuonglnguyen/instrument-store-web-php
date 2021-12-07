@@ -61,11 +61,11 @@ $list = mysqli_fetch_all($product->getFeaturedProducts(), MYSQLI_ASSOC);
         foreach ($list as $key => $value) { ?>
             <div class="card">
                 <div class="imgBx">
-                    <a href="single.html"><img src="admin/uploads/<?= $value['image'] ?>" alt=""></a>
+                    <a href="detail.php?id=<?= $value['id'] ?>"><img src="admin/uploads/<?= $value['image'] ?>" alt=""></a>
                 </div>
                 <div class="content">
                     <div class="productName">
-                        <a href="single.html">
+                        <a href="detail.php?id=<?= $value['id'] ?>">
                             <h3><?= $value['name'] ?></h3>
                         </a>
                     </div>

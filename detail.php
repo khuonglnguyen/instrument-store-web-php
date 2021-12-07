@@ -63,8 +63,15 @@ if (!$result) {
                 <h2><?= $result['name'] ?></h2>
             </div>
             <div class="price-single">
-                Giá: <b><?= number_format($result['promotionPrice'], 0, '', ',') ?>VND</b>
+                Giá bán: <b><?= number_format($result['promotionPrice'], 0, '', ',') ?>VND</b>
             </div>
+            <?php
+            if ($result['promotionPrice'] < $result['originalPrice']) { ?>
+                <div>
+                    Gía gốc: <del><?= number_format($result['originalPrice'], 0, '', ',') ?>VND</del>
+                </div>
+            <?php }
+            ?>
             <div class="des">
                 <p>Đã bán: <?= $result['soldCount'] ?></p>
                 <?= $result['des'] ?>
