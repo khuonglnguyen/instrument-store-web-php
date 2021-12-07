@@ -39,7 +39,7 @@ class product
             return $alert;
         } else {
             move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('Y/m/d') . "','$cateId','$qty','$des',1) ";
+            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('Y/m/d') . "','$cateId','$qty','$des',1,0) ";
             $result = $this->db->insert($query);
             if ($result) {
                 $alert = "<span class='success'>Sản phẩm đã được thêm thành công</span>";
@@ -51,12 +51,17 @@ class product
         }
     }
 
-    public function getAllAdmin()
+    public function getAllAdmin($page = 1, $total = 8)
     {
+        if ($page <= 0) {
+            $page = 1;
+        }
+        $tmp = ($page - 1) * $total;
         $query =
             "SELECT products.*, categories.name as cateName, users.fullName
 			 FROM products INNER JOIN categories ON products.cateId = categories.id INNER JOIN users ON products.createdBy = users.id
-			 order by products.id desc ";
+			 order by products.id desc 
+             limit $tmp,$total";
         $result = $this->db->select($query);
         return $result;
     }
@@ -70,6 +75,18 @@ class product
              order by products.id desc ";
         $result = $this->db->select($query);
         return $result;
+    }
+
+    public function getCountPaging($row = 8)
+    {
+        $query = "SELECT COUNT(*) FROM products";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $totalrow = intval((mysqli_fetch_all($mysqli_result, MYSQLI_ASSOC)[0])['COUNT(*)']);
+            $result = ceil($totalrow / $row);
+            return $result;
+        }
+        return false;
     }
 
     public function getFeaturedProducts()
@@ -180,7 +197,7 @@ class product
         }
     }
 
-    public function updateQty($id,$qty)
+    public function updateQty($id, $qty)
     {
         $query = "UPDATE products SET qty = qty - $qty, soldCount = soldCount + $qty WHERE id = $id";
         $mysqli_result = $this->db->update($query);

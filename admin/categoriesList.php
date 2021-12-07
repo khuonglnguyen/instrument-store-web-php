@@ -46,7 +46,7 @@ $list = $categories->getAllAdmin();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Admin</title>
+    <title>Danh sách danh mục</title>
 </head>
 
 <body>
@@ -84,7 +84,7 @@ $list = $categories->getAllAdmin();
                         <td><?= $value['name'] ?></td>
                         <td><?= ($value['status']) ? "Active" : "Block" ?></td>
                         <td>
-                            <a href="edit_category.php?id=<?= $value['id'] ?>">Sửa</a>
+                            <a href="edit_category.php?id=<?= $value['id'] ?>">Xem/Sửa</a>
                             <?php
                             if ($value['status']) { ?>
                                 <form action="categoriesList.php" method="post">

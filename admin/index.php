@@ -3,7 +3,7 @@ include '../lib/session.php';
 Session::checkSession('admin');
 $role_id = Session::get('role_id');
 if ($role_id == 1) {
-    header("Location:productlist.php");
+    header("Location:productlist.php?page=1");
 } else {
     header("Location:../index.php");
 }

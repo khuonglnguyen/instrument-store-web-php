@@ -74,6 +74,10 @@ a:hover{
   height: auto;
 }
 
+.addNew{
+  margin-top: 30px;
+}
+
 .title{
     background-color: white;
 }
@@ -227,3 +231,12 @@ footer .copyright{
     background-color: mediumvioletred;
     color: white;
   }
+
+.pagination{
+  text-align: center;
+}
+
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}

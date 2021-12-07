@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $product = new product();
-$list = $product->getAllAdmin();
+$list = $product->getAllAdmin($_GET['page']);
+$pageCount = $product->getCountPaging();
 ?>
 
 <!DOCTYPE html>
@@ -46,8 +47,9 @@ $list = $product->getAllAdmin();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Admin</title>
+    <title>Danh sách sản phẩm</title>
 </head>
+
 <body>
     <nav>
         <input type="checkbox" id="check">
@@ -87,8 +89,8 @@ $list = $product->getAllAdmin();
                         <td><?= $count++ ?></td>
                         <td><?= $value['name'] ?></td>
                         <td><img class="image-cart" src="uploads/<?= $value['image'] ?>" alt=""></td>
-                        <td><?= number_format($value['originalPrice'], 0, '', ',')?> VND</td>
-                        <td><?= number_format($value['promotionPrice'], 0, '', ',')?> VND</td>
+                        <td><?= number_format($value['originalPrice'], 0, '', ',') ?> VND</td>
+                        <td><?= number_format($value['promotionPrice'], 0, '', ',') ?> VND</td>
                         <td><?= $value['fullName'] ?></td>
                         <td><?= $value['qty'] ?></td>
                         <td><?= ($value['status']) ? "Active" : "Block" ?></td>
@@ -113,6 +115,19 @@ $list = $product->getAllAdmin();
         <?php } else { ?>
             <h3>Chưa có sản phẩm nào...</h3>
         <?php } ?>
+        <div class="pagination">
+            <a href="productlist.php?page=<?= ($_GET['page'] <= 1 ) ? 1 : $_GET['page'] - 1 ?>">&laquo;</a>
+            <?php
+            for ($i = 1; $i <= $pageCount; $i++) {
+                if ($i == $_GET['page']) { ?>
+                    <a class="active" href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                <?php } else { ?>
+                    <a href="productlist.php?page=<?= $i ?>"><?= $i ?></a>
+                <?php  } ?>
+            <?php }
+            ?>
+            <a href="productlist.php?page=<?= $_GET['page'] + 1 ?>">&raquo;</a>
+        </div>
     </div>
     </div>
     <footer>

@@ -25,7 +25,7 @@ if ($role_id == 1) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://use.fontawesome.com/2145adbb48.js"></script>
     <script src="https://kit.fontawesome.com/a42aeb5b72.js" crossorigin="anonymous"></script>
-    <title>Thêm mới sản phẩm</title>
+    <title>Thêm mới danh mục</title>
 </head>
 
 <body>
