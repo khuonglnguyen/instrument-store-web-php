@@ -38,8 +38,9 @@ $order_result = $order->getById($result[0]['orderId']);
         </label>
         <label class="logo">ADMIN</label>
         <ul>
-            <li><a href="productlist.php">Quản lý Sản phẩm</a></li>
-            <li><a href="orderlist.php" class="active">Quản lý Đơn hàng</a></li>
+            <li><a href="productlist.php?page=1">Quản lý Sản phẩm</a></li>
+            <li><a href="categoriesList.php?page=1">Quản lý Danh mục</a></li>
+            <li><a href="orderlist.php?page=1" class="active">Quản lý Đơn hàng</a></li>
         </ul>
     </nav>
     <div class="title">
