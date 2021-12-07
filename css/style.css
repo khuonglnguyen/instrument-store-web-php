@@ -456,3 +456,12 @@ input[type=number]{
   margin-left: 100px;
   width: 200px;
 }
+
+.pagination{
+  text-align: center;
+}
+
+.pagination a.active {
+  background-color: dodgerblue;
+  color: white;
+}

@@ -36,7 +36,7 @@ $userInfo = $user->get();
         <label class="logo" id="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
-            <li><a href="productList.php?page=1&cateId=2">Sản phẩm</a></li>
+            <li><a href="productList.php">Sản phẩm</a></li>
             <?php
             if (isset($_SESSION['user']) && $_SESSION['user']) { ?>
                 <li><a href="logout.php" id="signin">Đăng xuất</a></li>

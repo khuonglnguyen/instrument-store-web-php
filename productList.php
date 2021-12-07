@@ -8,7 +8,8 @@ $cart = new cart();
 $totalQty = $cart->getTotalQtyByUserId();
 
 $product = new product();
-$list = $product->getProductsByCateId($_GET['page'], $_GET['cateId']);
+$list = $product->getProductsByCateId((isset($_GET['page']) ? $_GET['page'] : 1), (isset($_GET['cateId']) ? $_GET['cateId'] : 2));
+$pageCount = $product->getCountPagingClient((isset($_GET['cateId']) ? $_GET['cateId'] : 2));
 
 $categories = new categories();
 $categoriesList = $categories->getAll();
@@ -36,8 +37,8 @@ $categoriesList = $categories->getAll();
         </label>
         <label class="logo">STORENOW</label>
         <ul>
-            <li><a href="index.php" >Trang chủ</a></li>
-            <li><a href="productList.php?page=1&cateId=2" class="active">Sản phẩm</a></li>
+            <li><a href="index.php">Trang chủ</a></li>
+            <li><a href="productList.php" class="active">Sản phẩm</a></li>
             <?php
             if (isset($_SESSION['user']) && $_SESSION['user']) { ?>
                 <li><a href="logout.php" id="signin">Đăng xuất</a></li>
@@ -65,9 +66,9 @@ $categoriesList = $categories->getAll();
             <?php
             foreach ($categoriesList as $key => $value) {
                 if ($value['id'] == $_GET['cateId']) { ?>
-                    <option selected value="productList.php?page=1&cateId=<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <option selected value="productList.php?cateId=<?= $value['id'] ?>"><?= $value['name'] ?></option>
                 <?php } else { ?>
-                    <option value="productList.php?page=1&cateId=<?= $value['id'] ?>"><?= $value['name'] ?></option>
+                    <option value="productList.php?cateId=<?= $value['id'] ?>"><?= $value['name'] ?></option>
                 <?php } ?>
             <?php }
             ?>
@@ -113,6 +114,23 @@ $categoriesList = $categories->getAll();
         <?php  }
         ?>
     </div>
+    <div class="pagination">
+            <a href="productList.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>">&laquo;</a>
+            <?php
+            for ($i = 1; $i <= $pageCount; $i++) {
+                if (isset($_GET['page'])) {
+                    if ($i == $_GET['page']) { ?>
+                        <a class="active" href="productList.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php } else { ?>
+                        <a href="productList.php?page=<?= $i ?>"><?= $i ?></a>
+                    <?php  }
+                } else { ?>
+                    <a href="productList.php?page=<?= $i ?>"><?= $i ?></a>
+                <?php  } ?>
+            <?php }
+            ?>
+            <a href="productList.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>">&raquo;</a>
+        </div>
     <footer>
         <div class="social">
             <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>

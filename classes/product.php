@@ -89,6 +89,18 @@ class product
         return false;
     }
 
+    public function getCountPagingClient($cateId, $row = 8)
+    {
+        $query = "SELECT COUNT(*) FROM products WHERE cateId = $cateId";
+        $mysqli_result = $this->db->select($query);
+        if ($mysqli_result) {
+            $totalrow = intval((mysqli_fetch_all($mysqli_result, MYSQLI_ASSOC)[0])['COUNT(*)']);
+            $result = ceil($totalrow / $row);
+            return $result;
+        }
+        return false;
+    }
+
     public function getFeaturedProducts()
     {
         $query =
