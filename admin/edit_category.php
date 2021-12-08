@@ -54,7 +54,7 @@ if ($role_id == 1) {
         ?>
         <div class="form-add">
             <form action="edit_category.php?id=<?= $categoryUpdate['id'] ?>" method="post">
-                <input type="text" hidden name="id" style="display: none;" value="<?= $productUpdate['id'] ?>">
+                <input type="text" hidden name="id" style="display: none;" value="<?= (isset($_GET['id']) ? $_GET['id'] : $categoryUpdate['id']) ?>">
                 <label for="name">Tên danh mục</label>
                 <input type="text" id="name" name="name" placeholder="Tên danh mục.." value="<?= $categoryUpdate['name'] ?>">
 

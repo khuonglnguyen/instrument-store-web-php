@@ -115,21 +115,21 @@ $categoriesList = $categories->getAll();
         ?>
     </div>
     <div class="pagination">
-            <a href="productList.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>">&laquo;</a>
+            <a href="productList.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>&cateId=<?= $_GET['cateId'] ?>">&laquo;</a>
             <?php
             for ($i = 1; $i <= $pageCount; $i++) {
                 if (isset($_GET['page'])) {
                     if ($i == $_GET['page']) { ?>
-                        <a class="active" href="productList.php?page=<?= $i ?>"><?= $i ?></a>
+                        <a class="active" href="productList.php?page=<?= $i ?>&cateId=<?= $_GET['cateId'] ?>"><?= $i ?></a>
                     <?php } else { ?>
-                        <a href="productList.php?page=<?= $i ?>"><?= $i ?></a>
+                        <a href="productList.php?page=<?= $i ?>&cateId=<?= $_GET['cateId'] ?>"><?= $i ?></a>
                     <?php  }
                 } else { ?>
-                    <a href="productList.php?page=<?= $i ?>"><?= $i ?></a>
+                    <a href="productList.php?page=<?= $i ?>&cateId=<?= $_GET['cateId'] ?>"><?= $i ?></a>
                 <?php  } ?>
             <?php }
             ?>
-            <a href="productList.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>">&raquo;</a>
+            <a href="productList.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>&cateId=<?= $_GET['cateId'] ?>">&raquo;</a>
         </div>
     <footer>
         <div class="social">

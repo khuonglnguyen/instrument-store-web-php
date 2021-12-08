@@ -53,16 +53,16 @@ $categoriesList = $category->getAll();
         <div class="form-add">
             <form action="add_product.php" method="post" enctype="multipart/form-data">
                 <label for="name">Tên sản phẩm</label>
-                <input type="text" id="name" name="name" placeholder="Tên sản phẩm..">
+                <input type="text" id="name" name="name" placeholder="Tên sản phẩm.." required>
 
                 <label for="originalPrice">Giá gốc</label>
-                <input type="number" id="originalPrice" name="originalPrice" placeholder="Giá..">
+                <input type="number" id="originalPrice" name="originalPrice" placeholder="Giá.." required min="1">
 
                 <label for="promotionPrice">Giá khuyến mãi</label>
-                <input type="number" id="promotionPrice" name="promotionPrice" placeholder="Giá..">
+                <input type="number" id="promotionPrice" name="promotionPrice" placeholder="Giá.." required min="1">
 
                 <label for="image">Hình ảnh</label>
-                <input type="file" id="image" name="image">
+                <input type="file" id="image" name="image" required>
 
                 <label for="cateId">Loại sản phẩm</label>
                 <select id="cateId" name="cateId">
@@ -74,10 +74,10 @@ $categoriesList = $category->getAll();
                 </select>
 
                 <label for="qty">Số lượng</label>
-                <input type="number" id="qty" name="qty">
+                <input type="number" id="qty" name="qty" required min="1">
 
                 <label for="des">Mô tả</label>
-                <textarea name="des" id="des" cols="30" rows="10"></textarea>
+                <textarea name="des" id="des" cols="30" rows="10" required></textarea>
 
                 <input type="submit" value="Lưu" name="submit">
             </form>

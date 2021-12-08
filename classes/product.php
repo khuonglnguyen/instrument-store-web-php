@@ -34,20 +34,15 @@ class product
         $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
         $uploaded_image = "uploads/" . $unique_image;
 
-        if ($name == '' || $originalPrice == "" || $promotionPrice == "" || $cateId == "" || $des == "" || $qty == "") {
-            $alert = "<span class='error'>Vui lòng nhập đầy đủ thông tin sản phẩm</span>";
+        move_uploaded_file($file_temp, $uploaded_image);
+        $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('Y/m/d') . "','$cateId','$qty','$des',1,0) ";
+        $result = $this->db->insert($query);
+        if ($result) {
+            $alert = "<span class='success'>Sản phẩm đã được thêm thành công</span>";
             return $alert;
         } else {
-            move_uploaded_file($file_temp, $uploaded_image);
-            $query = "INSERT INTO products VALUES (NULL,'$name','$originalPrice','$promotionPrice','$unique_image'," . Session::get('userId') . ",'" . date('Y/m/d') . "','$cateId','$qty','$des',1,0) ";
-            $result = $this->db->insert($query);
-            if ($result) {
-                $alert = "<span class='success'>Sản phẩm đã được thêm thành công</span>";
-                return $alert;
-            } else {
-                $alert = "<span class='error'>Thêm sản phẩm thất bại</span>";
-                return $alert;
-            }
+            $alert = "<span class='error'>Thêm sản phẩm thất bại</span>";
+            return $alert;
         }
     }
 
@@ -149,16 +144,10 @@ class product
         $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
         $uploaded_image = "uploads/" . $unique_image;
 
-
-        if ($name == '' || $originalPrice == "" || $promotionPrice == "" || $cateId == "" || $des == "" || $qty == "") {
-            $alert = "<span class='error'>Vui lòng nhập đầy đủ thông tin sản phẩm</span>";
-            return $alert;
-        } else {
-
-            //If user has chooose new image
-            if (!empty($file_name)) {
-                move_uploaded_file($file_temp, $uploaded_image);
-                $query = "UPDATE products SET 
+        //If user has chooose new image
+        if (!empty($file_name)) {
+            move_uploaded_file($file_temp, $uploaded_image);
+            $query = "UPDATE products SET 
 					name ='$name',
 					cateId = '$cateId',
 					originalPrice = '$originalPrice',
@@ -167,8 +156,8 @@ class product
 					qty = '$qty',
 					image = '$unique_image'
 					 WHERE id = " . $data['id'] . " ";
-            } else {
-                $query = "UPDATE products SET 
+        } else {
+            $query = "UPDATE products SET 
 					name ='$name',
 					cateId = '$cateId',
 					originalPrice = '$originalPrice',
@@ -176,15 +165,14 @@ class product
 					des = '$des',
 					qty = '$qty'
 					 WHERE id = " . $data['id'] . " ";
-            }
-            $result = $this->db->update($query);
-            if ($result) {
-                $alert = "<span class='success'>Cập nhật sản phẩm thành công</span>";
-                return $alert;
-            } else {
-                $alert = "<span class='error'>Cập nhật sản phẩm thất bại</span>";
-                return $alert;
-            }
+        }
+        $result = $this->db->update($query);
+        if ($result) {
+            $alert = "<span class='success'>Cập nhật sản phẩm thành công</span>";
+            return $alert;
+        } else {
+            $alert = "<span class='error'>Cập nhật sản phẩm thất bại</span>";
+            return $alert;
         }
     }
 
