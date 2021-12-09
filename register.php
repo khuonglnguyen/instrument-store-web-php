@@ -3,7 +3,7 @@ include 'classes/user.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = new user();
     $result = $user->insert($_POST);
-    if ($result && $result != 'Email đã tồn tại!') {
+    if ($result == true) {
         $userId = $user->getLastUserId(); 
         header("Location:./confirm.php?id=".$userId['id']."");
     }
