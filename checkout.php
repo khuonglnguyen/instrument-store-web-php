@@ -95,7 +95,7 @@ $userInfo = $user->get();
                         Số lượng: <b id="qtycart"><?= $totalQty['total'] ?></b>
                     </div>
                     <div>
-                        Tổng tiền: <b id="totalcart"><?= number_format($totalPrice['total'], 0, '', ',') ?>vnđ</b>
+                        Tổng tiền: <b id="totalcart"><?= number_format($totalPrice['total'], 0, '', ',') ?>VND</b>
                     </div>
                     <div>
                         Địa chỉ nhận hàng: <b><?= $userInfo['address'] ?></b>
@@ -119,10 +119,10 @@ $userInfo = $user->get();
         </div>
         <ul class="list">
             <li>
-                <a href="#">Trang Chủ</a>
+                <a href="/">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Sản Phẩm</a>
+                <a href="productList.php">Sản Phẩm</a>
             </li>
         </ul>
         <p class="copyright">STORENOW @ 2021</p>

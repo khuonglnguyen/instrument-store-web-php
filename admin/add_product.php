@@ -85,26 +85,7 @@ $categoriesList = $category->getAll();
     </div>
     </div>
     <footer>
-        <div class="social">
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-        </div>
-        <ul class="list">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-        </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 

@@ -189,27 +189,9 @@ $completeOrderList = $order->getCompleteOrder();
         </div>
     </div>
     </div>
+    
     <footer>
-        <div class="social">
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-        </div>
-        <ul class="list">
-            <li>
-                <a href="#">Home</a>
-            </li>
-            <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
-            </li>
-        </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 <script type="text/javascript">
@@ -219,24 +201,14 @@ $completeOrderList = $order->getCompleteOrder();
     }
 
     function openTab(evt, tabName) {
-        // Declare all variables
         var i, tabcontent, tablinks;
 
-        // Get all elements with class="tabcontent" and hide them
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
 
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
     }
 </script>
 

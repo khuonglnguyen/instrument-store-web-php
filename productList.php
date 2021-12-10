@@ -86,8 +86,16 @@ $categoriesList = $categories->getAll();
                         <div>
                             Đã bán: <?= $value['soldCount'] ?>
                         </div>
+                        <div class="original-price">
+                            <?php
+                            if ($value['promotionPrice'] < $value['originalPrice']) { ?>
+                                Giá gốc: <del><?= number_format($value['originalPrice'], 0, '', ',') ?>VND</del>
+                            <?php } else { ?>
+                                <p>.</p>
+                            <?php } ?>
+                        </div>
                         <div class="price">
-                            Giá: <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
+                            Giá bán: <?= number_format($value['promotionPrice'], 0, '', ',') ?>VND
                         </div>
                         <!-- <div class="rating">
                             <div class="rating">
@@ -111,22 +119,22 @@ $categoriesList = $categories->getAll();
         ?>
     </div>
     <div class="pagination">
-            <a href="productList.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>">&laquo;</a>
-            <?php
-            for ($i = 1; $i <= $pageCount; $i++) {
-                if (isset($_GET['page'])) {
-                    if ($i == $_GET['page']) { ?>
-                        <a class="active" href="productList.php?page=<?= $i ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>"><?= $i ?></a>
-                    <?php } else { ?>
-                        <a href="productList.php?page=<?= $i ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>"><?= $i ?></a>
-                    <?php  }
-                } else { ?>
+        <a href="productList.php?page=<?= (isset($_GET['page'])) ? (($_GET['page'] <= 1) ? 1 : $_GET['page'] - 1) : 1 ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>">&laquo;</a>
+        <?php
+        for ($i = 1; $i <= $pageCount; $i++) {
+            if (isset($_GET['page'])) {
+                if ($i == $_GET['page']) { ?>
+                    <a class="active" href="productList.php?page=<?= $i ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>"><?= $i ?></a>
+                <?php } else { ?>
                     <a href="productList.php?page=<?= $i ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>"><?= $i ?></a>
-                <?php  } ?>
-            <?php }
-            ?>
-            <a href="productList.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>">&raquo;</a>
-        </div>
+                <?php  }
+            } else { ?>
+                <a href="productList.php?page=<?= $i ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>"><?= $i ?></a>
+            <?php  } ?>
+        <?php }
+        ?>
+        <a href="productList.php?page=<?= (isset($_GET['page'])) ? $_GET['page'] + 1 : 2 ?>&cateId=<?= (isset($_GET['cateId'])) ? $_GET['cateId'] : 2 ?>">&raquo;</a>
+    </div>
     <footer>
         <div class="social">
             <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -135,10 +143,10 @@ $categoriesList = $categories->getAll();
         </div>
         <ul class="list">
             <li>
-                <a href="#">Trang Chủ</a>
+                <a href="./">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Sản Phẩm</a>
+                <a href="productList.php">Sản Phẩm</a>
             </li>
         </ul>
         <p class="copyright">STORENOW @ 2021</p>

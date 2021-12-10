@@ -68,8 +68,16 @@ $list = mysqli_fetch_all($product->getFeaturedProducts(), MYSQLI_ASSOC);
                     <div>
                         Đã bán: <?= $value['soldCount'] ?>
                     </div>
+                    <div class="original-price">
+                        <?php
+                        if ($value['promotionPrice'] < $value['originalPrice']) { ?>
+                            Giá gốc: <del><?= number_format($value['originalPrice'], 0, '', ',') ?>VND</del>
+                        <?php } else { ?>
+                            <p>.</p>
+                        <?php } ?>
+                    </div>
                     <div class="price">
-                        Giá: <?= number_format($value['originalPrice'], 0, '', ',') ?> vnd
+                        Giá bán: <?= number_format($value['promotionPrice'], 0, '', ',') ?>VND
                     </div>
                     <!-- <div class="rating">
                         <div class="rating">
@@ -97,10 +105,10 @@ $list = mysqli_fetch_all($product->getFeaturedProducts(), MYSQLI_ASSOC);
         </div>
         <ul class="list">
             <li>
-                <a href="#">Trang Chủ</a>
+                <a href="./">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Sản Phẩm</a>
+                <a href="productList.php">Sản Phẩm</a>
             </li>
         </ul>
         <p class="copyright">STORENOW @ 2021</p>

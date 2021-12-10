@@ -86,10 +86,10 @@ if (!$result) {
         </div>
         <ul class="list">
             <li>
-                <a href="#">Trang Chủ</a>
+                <a href="./">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Sản Phẩm</a>
+                <a href="productList.php">Sản Phẩm</a>
             </li>
         </ul>
         <p class="copyright">STORENOW @ 2021</p>

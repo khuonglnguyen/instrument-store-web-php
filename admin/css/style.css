@@ -87,58 +87,6 @@ footer {
   background-color:white;
 }
 
-footer .social{
-  text-align: center;
-  padding-bottom: 25px;
-  color: white;
-}
-
-footer .social a{
-  color: inherit;
-  font-size: 24px;
-  border: 1px solid steelblue;
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  text-align: center;
-  border-radius: 50%;
-  margin: 0 8px;
-  transition: 0.5s;
-  background-color: white;
-  color: #2c3e50;
-  opacity: 0.8;
-}
-
-footer .social a:hover{
-  opacity: 1;
-}
-
-footer ul{
-  margin-top: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 18px;
-  /* line-height: 1.6; */
-  margin-bottom: 0;
-  text-align: center;
-}
-
-footer ul a{
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.8;
-}
-
-footer ul li{
-  display: inline;
-  padding: 0 15px;
-}
-
-footer ul li a:hover{
-  opacity: 1;
-  color: #070808;
-}
-
 footer .copyright{
   margin-top: 15px;
   text-align: center;
@@ -212,7 +160,7 @@ footer .copyright{
   }
 
   .tabcontent{
-    height: 300px;
+    height: 450px;
   }
 
   .tablinks{
