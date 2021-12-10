@@ -1,22 +1,11 @@
 <?php
-
-/**
- *Session Class
- **/
-// init file session
 class Session
 {
    public static function init()
    {
-      if (version_compare(phpversion(), '5.4.0', '<')) {
-         if (session_id() == '') {
-            session_start();
-         }
-      } else {
-         if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-         }
-      }
+      if (session_status() === PHP_SESSION_NONE) {
+         session_start();
+     }
    }
 
    public static function set($key, $val)
@@ -24,7 +13,6 @@ class Session
       self::init();
       $_SESSION[$key] = $val;
    }
-   //set key to value
 
    public static function get($key)
    {
@@ -40,14 +28,13 @@ class Session
    {
       self::init();
       if (self::get("user") == false) {
-         self::destroy();
          if ($type == 'admin') {
             header("Location:../login.php");
          }
          header("Location:login.php");
       }
    }
-   //check session
+
    public static function checkLogin()
    {
       self::init();

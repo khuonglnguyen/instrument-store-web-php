@@ -2,9 +2,9 @@
 include 'classes/user.php';
 $user = new user();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = md5($_POST['password']);
-    $login_check = $user->login($username, $password);
+    $login_check = $user->login($email, $password);
 }
 ?>
 
@@ -24,10 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
@@ -52,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container-single">
         <div class="login">
             <form action="login.php" method="post" class="form-login">
-                <label for="username">Tên đăng nhập</label>
-                <input type="text" id="username" name="username" placeholder="Tên đăng nhập..." required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email..." required>
 
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password" placeholder="Mật khẩu..." required>
@@ -72,19 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <ul class="list">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
+                <a href="#">Sản Phẩm</a>
             </li>
         </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 

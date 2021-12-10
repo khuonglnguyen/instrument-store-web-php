@@ -130,7 +130,7 @@ $completeOrderList = $order->getCompleteOrder();
                         <th>STT</th>
                         <th>Mã đơn hàng</th>
                         <th>Ngày đặt</th>
-                        <th>Ngày giao</th>
+                        <th>Ngày nhận</th>
                         <th>Tình trạng</th>
                         <th>Thao tác</th>
                     </tr>
@@ -163,7 +163,7 @@ $completeOrderList = $order->getCompleteOrder();
                         <th>STT</th>
                         <th>Mã đơn hàng</th>
                         <th>Ngày đặt</th>
-                        <th>Ngày giao</th>
+                        <th>Ngày nhận</th>
                         <th>Tình trạng</th>
                         <th>Thao tác</th>
                     </tr>

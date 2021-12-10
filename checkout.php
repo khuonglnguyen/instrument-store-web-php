@@ -29,10 +29,6 @@ $userInfo = $user->get();
 
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
         <label class="logo" id="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
@@ -123,19 +119,13 @@ $userInfo = $user->get();
         </div>
         <ul class="list">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
+                <a href="#">Sản Phẩm</a>
             </li>
         </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 <script type="text/javascript">
@@ -150,7 +140,7 @@ $userInfo = $user->get();
         http.onreadystatechange = function() {
             if (http.readyState === XMLHttpRequest.DONE) {
                 var status = http.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
+                if (status === 200) {
                     var arr = http.responseText;
                     var b = false;
                     var result = "";
@@ -163,14 +153,14 @@ $userInfo = $user->get();
                         }
                     }
                     var arrResult = JSON.parse(result.replace("undefined", ""));
-
+                    console.log(arrResult);
                     document.getElementById("totalQtyHeader").innerHTML = arrResult[1]['total'];
                     document.getElementById("qtycart").innerHTML = arrResult[1]['total'];
-                    document.getElementById("totalcart").innerHTML = arrResult[0]['total'].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "vnđ";
+                    document.getElementById("totalcart").innerHTML = arrResult[0]['total'].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "VND";
 
                     //alert('Đã cập nhật giỏ hàng!');
-                } else if (status === 0 || status == 501) {
-                    alert('Số lượng sản phẩm không đủ!');
+                } else if (status === 501) {
+                    alert('Số lượng sản phẩm không đủ để thêm vào giỏ hàng!');
                     e.value = parseInt(e.value) - 1;
                 } else {
                     alert('Cập nhật giỏ hàng thất bại!');

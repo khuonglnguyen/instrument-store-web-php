@@ -22,22 +22,17 @@ class user
 
 	public function login($email, $password)
 	{
-		if (empty($email) || empty($password)) {
-			$alert = "Email và password không được để trống!";
-			return $alert;
+		$query = "SELECT * FROM users WHERE email = '$email' AND password = '$password' LIMIT 1 ";
+		$result = $this->db->select($query);
+		if ($result) {
+			$value = $result->fetch_assoc();
+			Session::set('user', true);
+			Session::set('userId', $value['id']);
+			Session::set('role_id', $value['role_id']);
+			header("Location:index.php");
 		} else {
-			$query = "SELECT * FROM users WHERE email = '$email' AND password = '$password' LIMIT 1 ";
-			$result = $this->db->select($query);
-			if ($result) {
-				$value = $result->fetch_assoc();
-				Session::set('user', true);
-				Session::set('userId', $value['id']);
-				Session::set('role_id', $value['role_id']);
-				header("Location:index.php");
-			} else {
-				$alert = "Username hoặc password không đúng!";
-				return $alert;
-			}
+			$alert = "Tên đăng nhập hoặc mật khẩu không đúng!";
+			return $alert;
 		}
 	}
 

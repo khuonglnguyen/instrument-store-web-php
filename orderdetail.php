@@ -4,8 +4,8 @@ Session::checkSession('client');
 include_once 'classes/cart.php';
 include_once 'classes/orderDetails.php';
 
-$cart=new cart();
-$orderDetails=new orderDetails();
+$cart = new cart();
+$orderDetails = new orderDetails();
 
 $totalQty = $cart->getTotalQtyByUserId();
 $result = $orderDetails->getOrderDetails($_GET['orderId']);
@@ -27,10 +27,6 @@ $result = $orderDetails->getOrderDetails($_GET['orderId']);
 
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
@@ -47,7 +43,7 @@ $result = $orderDetails->getOrderDetails($_GET['orderId']);
                 <a href="checkout.php">
                     <i class="fa fa-shopping-bag"></i>
                     <span class="sumItem">
-                    <?= $totalQty['total'] ?>
+                        <?= $totalQty['total'] ?>
                     </span>
                 </a>
             </li>
@@ -55,7 +51,7 @@ $result = $orderDetails->getOrderDetails($_GET['orderId']);
     </nav>
     <section class="banner"></section>
     <div class="featuredProducts">
-        <h1>Chi tiết đơn hàng DH0001</h1>
+        <h1>Chi tiết đơn hàng <?= $_GET['orderId'] ?></h1>
     </div>
     <div class="container-single">
         <table class="order">
@@ -66,16 +62,16 @@ $result = $orderDetails->getOrderDetails($_GET['orderId']);
                 <th>Đơn giá</th>
                 <th>Số lượng</th>
             </tr>
-            <?php $count=1;
-            foreach ($result as $key => $value) { ?> 
+            <?php $count = 1;
+            foreach ($result as $key => $value) { ?>
                 <tr>
-                <td><?= $count++ ?></td>
-                <td><?= $value['productName'] ?></td>
-                <td><img class="image-cart" src="admin/uploads/<?= $value['productImage'] ?>" alt=""></td>
-                <td><?= $value['productPrice'] ?></td>
-                <td><?= $value['qty'] ?></td>
-            </tr>
-           <?php }
+                    <td><?= $count++ ?></td>
+                    <td><?= $value['productName'] ?></td>
+                    <td><img class="image-cart" src="admin/uploads/<?= $value['productImage'] ?>" alt=""></td>
+                    <td><?= number_format($value['productPrice'], 0, '', ',') ?>VND</td>
+                    <td><?= $value['qty'] ?></td>
+                </tr>
+            <?php }
             ?>
         </table>
 
@@ -89,19 +85,13 @@ $result = $orderDetails->getOrderDetails($_GET['orderId']);
         </div>
         <ul class="list">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
+                <a href="#">Sản Phẩm</a>
             </li>
         </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 

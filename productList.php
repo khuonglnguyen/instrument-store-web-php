@@ -31,10 +31,6 @@ $categoriesList = $categories->getAll();
 
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
@@ -79,11 +75,11 @@ $categoriesList = $categories->getAll();
             foreach ($list as $key => $value) { ?>
                 <div class="card">
                     <div class="imgBx">
-                        <a href="single.html"><img src="admin/uploads/<?= $value['image'] ?>" alt=""></a>
+                        <a href="detail.php?id=<?= $value['id'] ?>"><img src="admin/uploads/<?= $value['image'] ?>" alt=""></a>
                     </div>
                     <div class="content">
                         <div class="productName">
-                            <a href="single.html">
+                            <a href="detail.php?id=<?= $value['id'] ?>">
                                 <h3><?= $value['name'] ?></h3>
                             </a>
                         </div>
@@ -139,19 +135,13 @@ $categoriesList = $categories->getAll();
         </div>
         <ul class="list">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
+                <a href="#">Sản Phẩm</a>
             </li>
         </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 

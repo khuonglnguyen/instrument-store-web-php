@@ -29,10 +29,6 @@ if (!$result) {
 
 <body>
     <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="checkbtn">
-            <i class="fas fa-bars"></i>
-        </label>
         <label class="logo">STORENOW</label>
         <ul>
             <li><a href="index.php">Trang chủ</a></li>
@@ -90,19 +86,13 @@ if (!$result) {
         </div>
         <ul class="list">
             <li>
-                <a href="#">Home</a>
+                <a href="#">Trang Chủ</a>
             </li>
             <li>
-                <a href="#">Product</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#">About</a>
+                <a href="#">Sản Phẩm</a>
             </li>
         </ul>
-        <p class="copyright">Khuong Nguyen @ 2021</p>
+        <p class="copyright">STORENOW @ 2021</p>
     </footer>
 </body>
 
