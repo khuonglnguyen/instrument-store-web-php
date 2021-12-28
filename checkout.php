@@ -119,7 +119,7 @@ $userInfo = $user->get();
         </div>
         <ul class="list">
             <li>
-                <a href="/">Trang Chủ</a>
+                <a href="./">Trang Chủ</a>
             </li>
             <li>
                 <a href="productList.php">Sản Phẩm</a>

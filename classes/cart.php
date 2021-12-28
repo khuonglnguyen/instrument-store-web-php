@@ -29,7 +29,7 @@ class cart
         $image = $result["image"];
         $checkcart = "SELECT qty FROM cart WHERE productId = '$productId' AND userId = '$userId' ";
         $check_cart = $this->db->select($checkcart);
-        if (is_a($check_cart, 'mysqli_result')) {
+        if ($check_cart) {
             //Check qty product in db
             $qtyInCart = mysqli_fetch_row($check_cart)[0];
             $product = new product();
